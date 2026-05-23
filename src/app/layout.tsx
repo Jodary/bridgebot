@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "许小熊 AI — Create Your Own AI",
+  title: "bridgebot — Create Your Own AI",
   description: "Build a personalized AI companion and share it with others.",
 };
 
