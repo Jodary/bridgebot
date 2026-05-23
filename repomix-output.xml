@@ -1,0 +1,5627 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.gitignore
+AGENTS.md
+CLAUDE.md
+components.json
+eslint.config.mjs
+netlify.toml
+next.config.ts
+package.json
+postcss.config.mjs
+public/file.svg
+public/globe.svg
+public/next.svg
+public/vercel.svg
+public/window.svg
+README.md
+scripts/predev.js
+src/app/api/analytics/analyze/route.ts
+src/app/api/analytics/stats/route.ts
+src/app/api/bots/market/route.ts
+src/app/api/bots/relation/route.ts
+src/app/api/bots/route.ts
+src/app/api/chat/route.ts
+src/app/auth/login/page.tsx
+src/app/auth/register/page.tsx
+src/app/bot/[slug]/ChatWrapper.tsx
+src/app/bot/[slug]/dashboard/DashboardClient.tsx
+src/app/bot/[slug]/dashboard/page.tsx
+src/app/bot/[slug]/not-found.tsx
+src/app/bot/[slug]/page.tsx
+src/app/builder/start/page.tsx
+src/app/chat/page.tsx
+src/app/favicon.ico
+src/app/globals.css
+src/app/layout.tsx
+src/app/market/page.tsx
+src/app/not-found.tsx
+src/app/page.tsx
+src/components/auth/AuthForm.tsx
+src/components/builder/BotPreview.tsx
+src/components/builder/Step1Identity.tsx
+src/components/builder/Step2BotType.tsx
+src/components/builder/Step3Customize.tsx
+src/components/builder/Step4Advanced.tsx
+src/components/builder/Step4Visibility.tsx
+src/components/builder/WizardProgress.tsx
+src/components/chat/ChatInterface.tsx
+src/components/dashboard/EmotionChart.tsx
+src/components/dashboard/KeywordCloud.tsx
+src/components/dashboard/SessionList.tsx
+src/components/dashboard/StatsCards.tsx
+src/components/ui/avatar.tsx
+src/components/ui/badge.tsx
+src/components/ui/button.tsx
+src/components/ui/card.tsx
+src/components/ui/dialog.tsx
+src/components/ui/dropdown-menu.tsx
+src/components/ui/input.tsx
+src/components/ui/label.tsx
+src/components/ui/progress.tsx
+src/components/ui/radio-group.tsx
+src/components/ui/select.tsx
+src/components/ui/sonner.tsx
+src/components/ui/tabs.tsx
+src/components/ui/textarea.tsx
+src/lib/bot-types.ts
+src/lib/hooks/use-auth.tsx
+src/lib/prompt-generator.ts
+src/lib/supabase/client.ts
+src/lib/supabase/route-client.ts
+src/lib/supabase/server.ts
+src/lib/supabase/service.ts
+src/lib/utils.ts
+src/proxy.ts
+supabase-schema.sql
+tsconfig.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".gitignore">
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# windows reserved device name
+/nul
+/thumbs.db
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+</file>
+
+<file path="AGENTS.md">
+<!-- BEGIN:nextjs-agent-rules -->
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+<!-- END:nextjs-agent-rules -->
+</file>
+
+<file path="CLAUDE.md">
+@AGENTS.md
+</file>
+
+<file path="components.json">
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "base-nova",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "src/app/globals.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "iconLibrary": "lucide",
+  "rtl": false,
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  },
+  "menuColor": "default",
+  "menuAccent": "subtle",
+  "registries": {}
+}
+</file>
+
+<file path="eslint.config.mjs">
+import { defineConfig, globalIgnores } from "eslint/config";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTs from "eslint-config-next/typescript";
+
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  // Override default ignores of eslint-config-next.
+  globalIgnores([
+    // Default ignores of eslint-config-next:
+    ".next/**",
+    "out/**",
+    "build/**",
+    "next-env.d.ts",
+  ]),
+]);
+
+export default eslintConfig;
+</file>
+
+<file path="netlify.toml">
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NEXT_USE_NETLIFY_EDGE = "true"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+</file>
+
+<file path="next.config.ts">
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+};
+
+export default nextConfig;
+</file>
+
+<file path="package.json">
+{
+  "name": "xuxiaoxiong-bot",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "predev": "node scripts/predev.js",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.4.1",
+    "@supabase/ssr": "^0.10.3",
+    "@supabase/supabase-js": "^2.105.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.16.0",
+    "next": "16.2.6",
+    "next-themes": "^0.4.6",
+    "openai": "^6.37.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "shadcn": "^4.7.0",
+    "sonner": "^2.0.7",
+    "tailwind-merge": "^3.6.0",
+    "tw-animate-css": "^1.4.0"
+  },
+  "devDependencies": {
+    "@netlify/plugin-nextjs": "^5.15.11",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
+</file>
+
+<file path="postcss.config.mjs">
+const config = {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
+
+export default config;
+</file>
+
+<file path="public/file.svg">
+<svg fill="none" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 13.5V5.41a1 1 0 0 0-.3-.7L9.8.29A1 1 0 0 0 9.08 0H1.5v13.5A2.5 2.5 0 0 0 4 16h8a2.5 2.5 0 0 0 2.5-2.5m-1.5 0v-7H8v-5H3v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1M9.5 5V2.12L12.38 5zM5.13 5h-.62v1.25h2.12V5zm-.62 3h7.12v1.25H4.5zm.62 3h-.62v1.25h7.12V11z" clip-rule="evenodd" fill="#666" fill-rule="evenodd"/></svg>
+</file>
+
+<file path="public/globe.svg">
+<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g clip-path="url(#a)"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.27 14.1a6.5 6.5 0 0 0 3.67-3.45q-1.24.21-2.7.34-.31 1.83-.97 3.1M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.48-1.52a7 7 0 0 1-.96 0H7.5a4 4 0 0 1-.84-1.32q-.38-.89-.63-2.08a40 40 0 0 0 3.92 0q-.25 1.2-.63 2.08a4 4 0 0 1-.84 1.31zm2.94-4.76q1.66-.15 2.95-.43a7 7 0 0 0 0-2.58q-1.3-.27-2.95-.43a18 18 0 0 1 0 3.44m-1.27-3.54a17 17 0 0 1 0 3.64 39 39 0 0 1-4.3 0 17 17 0 0 1 0-3.64 39 39 0 0 1 4.3 0m1.1-1.17q1.45.13 2.69.34a6.5 6.5 0 0 0-3.67-3.44q.65 1.26.98 3.1M8.48 1.5l.01.02q.41.37.84 1.31.38.89.63 2.08a40 40 0 0 0-3.92 0q.25-1.2.63-2.08a4 4 0 0 1 .85-1.32 7 7 0 0 1 .96 0m-2.75.4a6.5 6.5 0 0 0-3.67 3.44 29 29 0 0 1 2.7-.34q.31-1.83.97-3.1M4.58 6.28q-1.66.16-2.95.43a7 7 0 0 0 0 2.58q1.3.27 2.95.43a18 18 0 0 1 0-3.44m.17 4.71q-1.45-.12-2.69-.34a6.5 6.5 0 0 0 3.67 3.44q-.65-1.27-.98-3.1" fill="#666"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h16v16H0z"/></clipPath></defs></svg>
+</file>
+
+<file path="public/next.svg">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 394 80"><path fill="#000" d="M262 0h68.5v12.7h-27.2v66.6h-13.6V12.7H262V0ZM149 0v12.7H94v20.4h44.3v12.6H94v21h55v12.6H80.5V0h68.7zm34.3 0h-17.8l63.8 79.4h17.9l-32-39.7 32-39.6h-17.9l-23 28.6-23-28.6zm18.3 56.7-9-11-27.1 33.7h17.8l18.3-22.7z"/><path fill="#000" d="M81 79.3 17 0H0v79.3h13.6V17l50.2 62.3H81Zm252.6-.4c-1 0-1.8-.4-2.5-1s-1.1-1.6-1.1-2.6.3-1.8 1-2.5 1.6-1 2.6-1 1.8.3 2.5 1a3.4 3.4 0 0 1 .6 4.3 3.7 3.7 0 0 1-3 1.8zm23.2-33.5h6v23.3c0 2.1-.4 4-1.3 5.5a9.1 9.1 0 0 1-3.8 3.5c-1.6.8-3.5 1.3-5.7 1.3-2 0-3.7-.4-5.3-1s-2.8-1.8-3.7-3.2c-.9-1.3-1.4-3-1.4-5h6c.1.8.3 1.6.7 2.2s1 1.2 1.6 1.5c.7.4 1.5.5 2.4.5 1 0 1.8-.2 2.4-.6a4 4 0 0 0 1.6-1.8c.3-.8.5-1.8.5-3V45.5zm30.9 9.1a4.4 4.4 0 0 0-2-3.3 7.5 7.5 0 0 0-4.3-1.1c-1.3 0-2.4.2-3.3.5-.9.4-1.6 1-2 1.6a3.5 3.5 0 0 0-.3 4c.3.5.7.9 1.3 1.2l1.8 1 2 .5 3.2.8c1.3.3 2.5.7 3.7 1.2a13 13 0 0 1 3.2 1.8 8.1 8.1 0 0 1 3 6.5c0 2-.5 3.7-1.5 5.1a10 10 0 0 1-4.4 3.5c-1.8.8-4.1 1.2-6.8 1.2-2.6 0-4.9-.4-6.8-1.2-2-.8-3.4-2-4.5-3.5a10 10 0 0 1-1.7-5.6h6a5 5 0 0 0 3.5 4.6c1 .4 2.2.6 3.4.6 1.3 0 2.5-.2 3.5-.6 1-.4 1.8-1 2.4-1.7a4 4 0 0 0 .8-2.4c0-.9-.2-1.6-.7-2.2a11 11 0 0 0-2.1-1.4l-3.2-1-3.8-1c-2.8-.7-5-1.7-6.6-3.2a7.2 7.2 0 0 1-2.4-5.7 8 8 0 0 1 1.7-5 10 10 0 0 1 4.3-3.5c2-.8 4-1.2 6.4-1.2 2.3 0 4.4.4 6.2 1.2 1.8.8 3.2 2 4.3 3.4 1 1.4 1.5 3 1.5 5h-5.8z"/></svg>
+</file>
+
+<file path="public/vercel.svg">
+<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1155 1000"><path d="m577.3 0 577.4 1000H0z" fill="#fff"/></svg>
+</file>
+
+<file path="public/window.svg">
+<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 2.5h13v10a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1zM0 1h16v11.5a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 0 12.5zm3.75 4.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5M7 4.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0m1.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5" fill="#666"/></svg>
+</file>
+
+<file path="README.md">
+# 许小熊 Bot
+
+个性化 AI 伙伴创建与对话平台。用户可以创建定制 AI Bot（配置人格、语气、类别、纪念日、爱好等），选择公开/私人/指定用户分享，通过智谱 GLM 模型与 Bot 实时对话。支持 Bot 记忆功能，每个用户可以为自己使用的 Bot 单独记录备忘信息。
+
+## 技术栈
+
+| 层 | 技术 |
+|---|------|
+| 框架 | Next.js 16 (App Router) + React 19 |
+| 样式 | Tailwind CSS 4 + shadcn/ui |
+| 数据库 | Supabase (PostgreSQL + Auth + RLS) |
+| AI 模型 | 智谱 GLM-4-Flash (OpenAI 兼容接口) |
+| 部署 | Netlify (Edge Functions) |
+
+## 项目结构
+
+```
+src/
+├── app/
+│   ├── page.tsx                      # 首页（未登录 → CTA，已登录 → 跳转聊天）
+│   ├── layout.tsx                    # 根布局（字体、AuthProvider、Toaster）
+│   ├── globals.css                   # Tailwind + shadcn 主题变量
+│   ├── not-found.tsx                 # 全局 404 页面
+│   │
+│   ├── auth/
+│   │   ├── login/page.tsx            # 登录页
+│   │   └── register/page.tsx         # 注册页
+│   │
+│   ├── chat/
+│   │   └── page.tsx                  # 我的 Bot（需登录），3 类 Tab：定制/私人/公开
+│   │
+│   ├── market/
+│   │   └── page.tsx                  # Bot 市场（需登录），展示所有公开 Bot
+│   │
+│   ├── bot/[slug]/
+│   │   ├── page.tsx                  # Bot 对话页（动态路由），权限校验
+│   │   ├── ChatWrapper.tsx           # 客户端包装组件，连接 ChatInterface
+│   │   └── not-found.tsx             # Bot 不存在时的提示页
+│   │
+│   ├── builder/start/
+│   │   └── page.tsx                  # Bot 创建向导（5 步：身份→类型→基础→高级→发布）
+│   │
+│   └── api/
+│       ├── bots/
+│       │   ├── route.ts              # GET（权限过滤）/ POST（创建）
+│       │   ├── market/route.ts       # GET 所有公开 Bot
+│       │   └── relation/route.ts     # GET/PATCH/POST 用户-Bot 关联与记忆
+│       └── chat/route.ts             # 聊天 API（SSE 流式，调用智谱模型）
+│
+├── components/
+│   ├── auth/AuthForm.tsx             # 登录/注册表单组件
+│   ├── builder/
+│   │   ├── WizardProgress.tsx        # 创建向导进度条（5 步）
+│   │   ├── Step1Identity.tsx         # 步骤1：选择用户身份
+│   │   ├── Step2BotType.tsx          # 步骤2：选择 Bot 类别
+│   │   ├── Step3Customize.tsx        # 步骤3：基础设定（名字、性格、语气）必填
+│   │   ├── Step4Advanced.tsx         # 步骤4：高级定制（纪念日、爱好、FAQ）选填
+│   │   ├── Step4Visibility.tsx       # 步骤5：设置可见性 + 授权邮箱
+│   │   └── BotPreview.tsx            # 实时预览 Bot 卡片
+│   ├── chat/
+│   │   └── ChatInterface.tsx         # 聊天界面（消息 + SSE 流式 + 记忆编辑）
+│   └── ui/                           # shadcn/ui 基础组件库
+│
+├── lib/
+│   ├── bot-types.ts                  # Bot 表单类型定义 + 选项常量
+│   ├── prompt-generator.ts           # 根据表单生成 system prompt
+│   ├── hooks/use-auth.tsx            # Auth Context + useAuth hook
+│   └── supabase/
+│       ├── client.ts                 # 浏览器端 Supabase 客户端
+│       ├── server.ts                 # Server Component 端客户端
+│       ├── route-client.ts           # Route Handler 端客户端
+│       └── service.ts                # Service Role 客户端（绕过 RLS，仅后端用）
+│
+├── proxy.ts                          # Next.js 中间件（保护 /builder 路由，刷新 session）
+├── scripts/predev.js                 # 开发前检查脚本
+├── supabase-schema.sql               # 完整数据库 Schema + RLS 策略
+├── netlify.toml                      # Netlify 部署配置
+└── .env.local                        # 本地环境变量（不入 git）
+```
+
+## 数据库表
+
+| 表 | 用途 |
+|----|------|
+| `profiles` | 用户扩展信息（关联 auth.users），注册时自动创建 |
+| `bots` | Bot 数据（名称、人格、可见性、slug 等），通过 `creator_id` 关联创建者 |
+| `bot_permissions` | 定制 Bot 的授权邮箱白名单，创建时自动写入创建者 + 指定用户 |
+| `user_bot_relations` | 用户与公开 Bot 的关联关系 + 记忆备注（首次对话自动建立） |
+| `chat_sessions` | 聊天会话记录 |
+| `messages` | 聊天消息记录 |
+
+## Bot 可见性
+
+| 类型 | 谁能看到和使用 |
+|------|---------------|
+| 私人 (`private`) | 仅创建者自己 |
+| 定制 (`specific_users`) | 创建者 + 指定邮箱的用户 |
+| 公开 (`public`) | 所有登录用户（首次对话后出现在「我的 Bot」中） |
+
+权限在 **应用层** 做显式过滤（`src/app/api/bots/route.ts` 的 GET 方法 + `src/app/bot/[slug]/page.tsx`），不依赖 Supabase RLS 的 cookie 传递，避免 Netlify Edge 环境下 cookie 读取不可靠的问题。
+
+## Bot 记忆
+
+每个用户可以对使用的 Bot 设置独立的记忆备注，Bot 会在对话中自然引用。记忆按 `user_id + bot_id` 隔离，互不影响。
+
+- 对话页顶部点 📖 图标展开记忆编辑框
+- 输入生日、爱好、重要事件等信息
+- 保存后 Bot 立即在对话中生效
+- 底层 system prompt 不受影响，记忆仅作为追加上下文
+
+## API 路由
+
+| 端点 | 方法 | 用途 | 认证 |
+|------|------|------|------|
+| `/api/bots` | GET | 获取个人可见的 Bot（私人+定制+已关联公开） | Cookie Session |
+| `/api/bots` | POST | 创建新 Bot | Cookie Session |
+| `/api/bots/market` | GET | 获取所有公开 Bot | Cookie Session |
+| `/api/bots/relation` | GET | 读取用户对某 Bot 的记忆 | Cookie Session |
+| `/api/bots/relation` | PATCH | 更新用户对某 Bot 的记忆 | Cookie Session |
+| `/api/bots/relation` | POST | 建立用户-Bot 关联（首次对话） | Cookie Session |
+| `/api/chat` | POST | SSE 流式对话 | Cookie Session |
+
+## 本地开发
+
+```bash
+# 安装依赖
+npm install
+
+# 启动开发服务器（自动读取 .env.local）
+npm run dev
+# → http://localhost:3000
+```
+
+## 环境变量
+
+`.env.local` 需配置以下变量：
+
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=https://<project>.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon-key>
+SUPABASE_SERVICE_KEY=<service-role-key>
+
+# 智谱 AI（OpenAI 兼容）
+OPENAI_API_KEY=<zhipu-api-key>
+OPENAI_BASE_URL=https://open.bigmodel.cn/api/paas/v4
+OPENAI_MODEL=glm-4-flash
+```
+
+## 部署到 Netlify
+
+1. 将代码推送到 GitHub
+2. Netlify 关联仓库，自动构建部署
+3. 在 Netlify Dashboard → Site settings → Environment variables 中添加**所有**环境变量
+4. 环境变量变更后需手动 **Trigger deploy**（Netlify 不会因环境变量变更自动重部署）
+
+## 数据库初始化
+
+1. 在 Supabase SQL Editor 中**完整执行** `supabase-schema.sql`
+2. 在 Supabase Authentication → Providers 中开启 **Email/Password**
+
+## 常见问题
+
+**Q: 创建 Bot 报 slug 重复错误？**
+A: 去 Supabase Table Editor 删掉旧 bot 数据，再重新创建。
+
+**Q: 指定用户看不到分享的 Bot？**
+A: 确认 Supabase 已执行 `supabase-schema.sql` 内的 RLS 策略，且对方登录邮箱与授权邮箱一致。
+
+**Q: 本地调试时 API 报 "Could not find the table"？**
+A: `.env.local` 中 Supabase URL/Key 指向的项目没有执行 `supabase-schema.sql` 建表。
+</file>
+
+<file path="scripts/predev.js">
+// 每次 npm run dev 前自动删除 Windows NUL 设备文件
+const { execSync } = require("child_process");
+const fs = require("fs");
+const path = require("path");
+
+const projectRoot = path.resolve(__dirname, "..");
+const nulPath = path.join(projectRoot, "nul");
+
+// 检查 nul 是否存在（通过 readdir 检测）
+try {
+  const files = fs.readdirSync(projectRoot);
+  if (files.includes("nul")) {
+    // 使用 PowerShell 通过 \\?\ 前缀绕过 Windows 保留名限制删除
+    const psPath = `\\\\?\\${projectRoot}\\nul`;
+    try {
+      execSync(
+        `powershell -NoProfile -Command "Remove-Item -Path '${psPath}' -Force -ErrorAction SilentlyContinue"`,
+        { stdio: "ignore", timeout: 5000 }
+      );
+    } catch {
+      // 如果 PowerShell 失败，尝试用 Node 直接删除
+      try {
+        fs.rmSync(psPath, { force: true });
+      } catch {
+        // 忽略
+      }
+    }
+  }
+} catch {
+  // 忽略所有错误，不阻塞 dev 启动
+}
+</file>
+
+<file path="src/app/api/analytics/analyze/route.ts">
+import { NextRequest, NextResponse } from "next/server";
+import OpenAI from "openai";
+import { createServiceClient } from "@/lib/supabase/service";
+
+export async function POST(req: NextRequest) {
+  try {
+    const { sessionId, botId } = await req.json();
+    if (!sessionId || !botId) {
+      return NextResponse.json({ error: "缺少 sessionId 或 botId" }, { status: 400 });
+    }
+
+    const supabase = createServiceClient();
+
+   // 1. 检查已分析条数，如果消息太少（少于3条）就跳过
+        const { data: existing } = await supabase
+          .from("conversation_analytics")
+          .select("id, message_count")
+          .eq("session_id", sessionId)
+          .maybeSingle();
+
+        // 如果已经有分析记录，并且消息数没增加超过3条，就跳过
+        if (existing && existing.message_count >= messages.length - 3) {
+          return NextResponse.json({ ok: true, message: "变化太小，跳过" });
+        }
+
+    // 2. 读取会话消息
+    const { data: session } = await supabase
+      .from("chat_sessions")
+      .select("id, user_id")
+      .eq("id", sessionId)
+      .single();
+    if (!session) {
+      return NextResponse.json({ error: "会话不存在" }, { status: 404 });
+    }
+
+    const { data: messages } = await supabase
+      .from("messages")
+      .select("role, content")
+      .eq("session_id", sessionId)
+      .order("created_at", { ascending: true });
+    if (!messages || messages.length === 0) {
+      return NextResponse.json({ error: "没有消息" }, { status: 400 });
+    }
+
+    // 3. 用 GLM 分析
+    const userMessages = messages
+      .filter((m) => m.role === "user")
+      .map((m) => m.content)
+      .join("\n");
+
+    const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+      baseURL: process.env.OPENAI_BASE_URL,
+    });
+
+    const analysisPrompt = `分析以下用户说的内容，以 JSON 格式返回分析结果（不要包含其他文字）：
+{
+  "emotion": "用户的主导情绪，只能是以下之一：happy/sad/anxious/angry/neutral",
+  "emotion_score": 情绪评分，-1到1之间，-1=非常消极，0=中性，1=非常积极,
+  "keywords": ["提取3-5个话题关键词，每个词2-4个字，中文"],
+  "summary": "一句话概括用户说了什么，不超过20个字"
+}
+
+用户说的内容：
+${userMessages || "（用户没有说话）"}`;
+
+    const completion = await openai.chat.completions.create({
+      model: process.env.OPENAI_MODEL || "gpt-3.5-turbo",
+      messages: [{ role: "user", content: analysisPrompt }],
+      temperature: 0.3,
+      max_tokens: 300,
+      response_format: { type: "json_object" },
+    });
+
+    const resultText = completion.choices[0]?.message?.content || "{}";
+    let analysis: {
+      emotion: string;
+      emotion_score: number;
+      keywords: string[];
+      summary: string;
+    };
+    try {
+      analysis = JSON.parse(resultText);
+    } catch {
+      analysis = {
+        emotion: "neutral",
+        emotion_score: 0,
+        keywords: [],
+        summary: "（分析失败）",
+      };
+    }
+
+    // 4. 写入 conversation_analytics
+    await supabase.from("conversation_analytics").insert({
+      bot_id: botId,
+      session_id: sessionId,
+      user_id: session.user_id,
+      dominant_emotion: analysis.emotion || "neutral",
+      emotion_score: analysis.emotion_score ?? 0,
+      keywords: analysis.keywords || [],
+      topic_summary: analysis.summary || "",
+      message_count: messages.length,
+    });
+
+    // 5. 更新 bot_daily_stats（聚合）
+    const today = new Date().toISOString().split("T")[0];
+
+    const { data: dailyStats } = await supabase
+      .from("bot_daily_stats")
+      .select("*")
+      .eq("bot_id", botId)
+      .eq("date", today)
+      .maybeSingle();
+
+    const { data: todayAnalytics } = await supabase
+      .from("conversation_analytics")
+      .select("user_id, emotion_score, dominant_emotion, keywords, message_count, session_id")
+      .eq("bot_id", botId)
+      .gte("analyzed_at", `${today}T00:00:00Z`)
+      .lte("analyzed_at", `${today}T23:59:59Z`);
+
+    if (todayAnalytics) {
+      const uniqueUsers = new Set(todayAnalytics.map((a) => a.user_id));
+      const totalSessions = todayAnalytics.length;
+      const totalMessages = todayAnalytics.reduce((sum, a) => sum + (a.message_count || 0), 0);
+      const scores = todayAnalytics
+        .map((a) => a.emotion_score)
+        .filter((s): s is number => s !== null);
+      const avgScore = scores.length > 0
+        ? Math.round((scores.reduce((a, b) => a + b, 0) / scores.length) * 100) / 100
+        : null;
+
+      const keywordCount = new Map<string, number>();
+      todayAnalytics.forEach((a) => {
+        (a.keywords || []).forEach((kw: string) => {
+          keywordCount.set(kw, (keywordCount.get(kw) || 0) + 1);
+        });
+      });
+      const topKeywords = Array.from(keywordCount.entries())
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 20)
+        .map(([keyword, count]) => ({ keyword, count }));
+
+      const emotionDist: Record<string, number> = {};
+      todayAnalytics.forEach((a) => {
+        const e = a.dominant_emotion || "neutral";
+        emotionDist[e] = (emotionDist[e] || 0) + 1;
+      });
+
+      if (dailyStats) {
+        await supabase
+          .from("bot_daily_stats")
+          .update({
+            unique_users: uniqueUsers.size,
+            total_sessions: totalSessions,
+            total_messages: totalMessages,
+            avg_emotion_score: avgScore,
+            top_keywords: JSON.stringify(topKeywords),
+            emotion_distribution: JSON.stringify(emotionDist),
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", dailyStats.id);
+      } else {
+        await supabase.from("bot_daily_stats").insert({
+          bot_id: botId,
+          date: today,
+          unique_users: uniqueUsers.size,
+          total_sessions: totalSessions,
+          total_messages: totalMessages,
+          avg_emotion_score: avgScore,
+          top_keywords: JSON.stringify(topKeywords),
+          emotion_distribution: JSON.stringify(emotionDist),
+        });
+      }
+    }
+
+    return NextResponse.json({ ok: true });
+  } catch (e: any) {
+    console.error("[ANALYZE ERROR]", e.message);
+    return NextResponse.json({ error: e.message }, { status: 500 });
+  }
+}
+</file>
+
+<file path="src/app/api/analytics/stats/route.ts">
+import { NextRequest, NextResponse } from "next/server";
+import { createRouteClient } from "@/lib/supabase/route-client";
+import { createServiceClient } from "@/lib/supabase/service";
+
+export async function GET(req: NextRequest) {
+  // 必须登录
+  const routeClient = createRouteClient(req);
+  const { data: authData } = await routeClient.auth.getUser();
+  const user = authData?.user;
+  if (!user) {
+    return NextResponse.json({ error: "请先登录" }, { status: 401 });
+  }
+
+  const botId = req.nextUrl.searchParams.get("botId");
+  if (!botId) {
+    return NextResponse.json({ error: "缺少 botId" }, { status: 400 });
+  }
+
+  const supabase = createServiceClient();
+
+  // 验证 bot 所有权
+  const { data: bot } = await supabase
+    .from("bots")
+    .select("id, creator_id, name")
+    .eq("id", botId)
+    .single();
+
+  if (!bot || bot.creator_id !== user.id) {
+    return NextResponse.json({ error: "无权查看" }, { status: 403 });
+  }
+
+  const days = parseInt(req.nextUrl.searchParams.get("days") || "7");
+
+  // 1. 总概览
+  const { data: allAnalytics } = await supabase
+    .from("conversation_analytics")
+    .select("user_id, emotion_score, dominant_emotion, keywords")
+    .eq("bot_id", botId);
+
+  const totalUsers = allAnalytics ? new Set(allAnalytics.map((a) => a.user_id)).size : 0;
+  const totalSessions = allAnalytics?.length || 0;
+   const totalMessages = allAnalytics?.reduce((sum, a) => sum + (a.message_count || 0), 0) || 0;
+  const scores = allAnalytics?.map((a) => a.emotion_score).filter((s): s is number => s !== null) || [];
+  const avgEmotion = scores.length > 0
+    ? Math.round((scores.reduce((a, b) => a + b, 0) / scores.length) * 100) / 100
+    : 0;
+
+  // 2. 每日聚合数据（过去 N 天）
+  const startDate = new Date();
+  startDate.setDate(startDate.getDate() - days);
+  const startStr = startDate.toISOString().split("T")[0];
+
+  const { data: dailyStats } = await supabase
+    .from("bot_daily_stats")
+    .select("*")
+    .eq("bot_id", botId)
+    .gte("date", startStr)
+    .order("date", { ascending: true });
+
+  // 3. 最近会话
+  const { data: recentSessions } = await supabase
+    .from("conversation_analytics")
+    .select(`
+      id, dominant_emotion, emotion_score, keywords, topic_summary, message_count, analyzed_at,
+      user_id
+    `)
+    .eq("bot_id", botId)
+    .order("analyzed_at", { ascending: false })
+    .limit(20);
+
+  return NextResponse.json({
+    botName: bot.name,
+    overview: {
+      totalUsers,
+      totalSessions,
+      totalMessages,
+      avgEmotionScore: avgEmotion,
+    },
+    dailyStats: (dailyStats || []).map((d) => ({
+      date: d.date,
+      uniqueUsers: d.unique_users,
+      totalSessions: d.total_sessions,
+      totalMessages: d.total_messages,
+      avgEmotionScore: d.avg_emotion_score,
+      topKeywords: typeof d.top_keywords === "string" ? JSON.parse(d.top_keywords) : d.top_keywords,
+      emotionDistribution: typeof d.emotion_distribution === "string" ? JSON.parse(d.emotion_distribution) : d.emotion_distribution,
+    })),
+    recentSessions: (recentSessions || []).map((s) => ({
+      id: s.id,
+      userId: s.user_id,
+      emotion: s.dominant_emotion,
+      emotionScore: s.emotion_score,
+      keywords: s.keywords,
+      summary: s.topic_summary,
+      messageCount: s.message_count,
+      analyzedAt: s.analyzed_at,
+    })),
+  });
+}
+</file>
+
+<file path="src/app/api/bots/market/route.ts">
+import { NextRequest, NextResponse } from "next/server";
+import { createRouteClient } from "@/lib/supabase/route-client";
+import { createServiceClient } from "@/lib/supabase/service";
+
+export async function GET(req: NextRequest) {
+  // 必须登录
+  const routeClient = createRouteClient(req);
+  const { data: authData } = await routeClient.auth.getUser();
+  if (!authData?.user) {
+    return NextResponse.json({ error: "请先登录" }, { status: 401 });
+  }
+
+  const supabase = createServiceClient();
+  const { data, error } = await supabase
+    .from("bots")
+    .select("*")
+    .eq("visibility", "public")
+    .eq("published", true)
+    .order("created_at", { ascending: false })
+    .limit(100);
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  return NextResponse.json(data ?? []);
+}
+</file>
+
+<file path="src/app/api/bots/relation/route.ts">
+import { NextRequest, NextResponse } from "next/server";
+import { createRouteClient } from "@/lib/supabase/route-client";
+import { createServiceClient } from "@/lib/supabase/service";
+
+function getUser(req: NextRequest) {
+  const routeClient = createRouteClient(req);
+  return routeClient.auth.getUser().then((d) => d.data?.user ?? null);
+}
+
+export async function GET(req: NextRequest) {
+  const user = await getUser(req);
+  if (!user) return NextResponse.json({ error: "请先登录" }, { status: 401 });
+
+  const botId = req.nextUrl.searchParams.get("botId");
+  if (!botId) return NextResponse.json({ error: "缺少 botId" }, { status: 400 });
+
+  const supabase = createServiceClient();
+  const { data, error } = await supabase
+    .from("user_bot_relations")
+    .select("memory_notes")
+    .eq("user_id", user.id)
+    .eq("bot_id", botId)
+    .maybeSingle();
+
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  return NextResponse.json({ memoryNotes: data?.memory_notes ?? "" });
+}
+
+export async function PATCH(req: NextRequest) {
+  const user = await getUser(req);
+  if (!user) return NextResponse.json({ error: "请先登录" }, { status: 401 });
+
+  const { botId, memoryNotes } = await req.json();
+  if (!botId) return NextResponse.json({ error: "缺少 botId" }, { status: 400 });
+
+  const supabase = createServiceClient();
+  const { error } = await supabase
+    .from("user_bot_relations")
+    .upsert({ user_id: user.id, bot_id: botId, memory_notes: memoryNotes ?? "" }, { onConflict: "user_id,bot_id" });
+
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  return NextResponse.json({ ok: true });
+}
+
+export async function POST(req: NextRequest) {
+  const user = await getUser(req);
+  if (!user) return NextResponse.json({ error: "请先登录" }, { status: 401 });
+
+  const { botId } = await req.json();
+  if (!botId) return NextResponse.json({ error: "缺少 botId" }, { status: 400 });
+
+  const supabase = createServiceClient();
+
+  const { error } = await supabase
+    .from("user_bot_relations")
+    .upsert({ user_id: user.id, bot_id: botId }, { onConflict: "user_id,bot_id" });
+
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  return NextResponse.json({ ok: true });
+}
+</file>
+
+<file path="src/app/api/bots/route.ts">
+import { NextRequest, NextResponse } from "next/server";
+import { createRouteClient } from "@/lib/supabase/route-client";
+import { createServiceClient } from "@/lib/supabase/service";
+
+export async function GET(req: NextRequest) {
+  // 必须登录
+  const routeClient = createRouteClient(req);
+  const { data: authData } = await routeClient.auth.getUser();
+  const user = authData?.user;
+  if (!user) {
+    return NextResponse.json({ error: "请先登录" }, { status: 401 });
+  }
+
+  const supabase = createServiceClient();
+
+  // 查所有 bots
+  const { data: allBots, error } = await supabase
+    .from("bots")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(50);
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  if (!allBots || allBots.length === 0) {
+    return NextResponse.json([]);
+  }
+
+  // 筛选候选 bot
+  const myBotIds = new Set<string>();        // 私人、定制（自己创建）
+  const permittedBotIds = new Set<string>();  // 定制（被授权）
+  const relatedPublicIds = new Set<string>(); // 公开（已聊过）
+
+  for (const bot of allBots) {
+    if (bot.creator_id === user.id) {
+      // 自己创建的：私人/定制/公开 都算
+      if (bot.visibility === "public") {
+        relatedPublicIds.add(bot.id);
+      } else {
+        myBotIds.add(bot.id);
+      }
+    } else if (
+      bot.visibility === "specific_users" &&
+      bot.published &&
+      user.email
+    ) {
+      permittedBotIds.add(bot.id);
+    }
+  }
+
+  // 查定制 bot 的权限
+  if (permittedBotIds.size > 0) {
+    const { data: perms } = await supabase
+      .from("bot_permissions")
+      .select("bot_id")
+      .in("bot_id", Array.from(permittedBotIds))
+      .eq("allowed_email", user.email!);
+
+    if (perms) {
+      for (const p of perms) {
+        myBotIds.add(p.bot_id); // 移入可看集合
+      }
+    }
+  }
+
+  // 查已聊过的公开 bot（非自己创建的）
+  const candidatePublic = allBots.filter(
+    (b) =>
+      b.visibility === "public" &&
+      b.published &&
+      b.creator_id !== user.id
+  );
+
+  if (candidatePublic.length > 0) {
+    const { data: relations } = await supabase
+      .from("user_bot_relations")
+      .select("bot_id")
+      .eq("user_id", user.id)
+      .in(
+        "bot_id",
+        candidatePublic.map((b) => b.id)
+      );
+
+    if (relations) {
+      for (const r of relations) {
+        relatedPublicIds.add(r.bot_id);
+      }
+    }
+  }
+
+  // 合并结果
+  const visibleIds = new Set([
+    ...myBotIds,
+    ...relatedPublicIds,
+  ]);
+
+  const filtered = allBots.filter((bot) => visibleIds.has(bot.id));
+
+  return NextResponse.json(filtered);
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json();
+
+    // 用 cookie 客户端获取真实用户信息
+    const routeClient = createRouteClient(req);
+    const { data: authData } = await routeClient.auth.getUser();
+    const user = authData?.user;
+    if (!user) {
+      return NextResponse.json({ error: "请先登录" }, { status: 401 });
+    }
+
+    // 用 Service Role 客户端写入
+    const { createClient } = await import("@supabase/supabase-js");
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_KEY!
+    );
+
+    const { data, error } = await supabase
+      .from("bots")
+      .insert({
+        name: body.name,
+        avatar_url: body.avatar_url || null,
+        gender: body.gender || null,
+        age: body.age || null,
+        relationship: body.relationship || null,
+        personality: body.personality,
+        speaking_style: body.speakingStyle,
+        forbidden_behaviors: body.forbiddenBehaviors || null,
+        system_prompt: body.systemPrompt,
+        category: body.category,
+        visibility: body.visibility,
+        published: true,
+        creator_id: user.id,
+      })
+      .select("id, slug")
+      .single();
+
+    if (error) {
+      console.error("[POST /api/bots] Supabase error:", error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    // 权限表：创建者邮箱 + 指定用户邮箱
+    const emailsToInsert = new Set<string>();
+    if (user.email) emailsToInsert.add(user.email);
+    if (body.allowedEmails?.length > 0) {
+      body.allowedEmails.forEach((email: string) => emailsToInsert.add(email));
+    }
+
+    if (emailsToInsert.size > 0) {
+      await supabase.from("bot_permissions").insert(
+        Array.from(emailsToInsert).map((email: string) => ({
+          bot_id: data.id,
+          allowed_email: email,
+        }))
+      );
+    }
+
+    return NextResponse.json(data);
+  } catch (e: any) {
+    console.error("[POST /api/bots] crash:", e.message);
+    return NextResponse.json({ error: e.message }, { status: 500 });
+  }
+}
+</file>
+
+<file path="src/app/api/chat/route.ts">
+import { NextRequest } from "next/server";
+import OpenAI from "openai";
+import { createRouteClient } from "@/lib/supabase/route-client";
+import { createServiceClient } from "@/lib/supabase/service";
+
+async function getUser(req: NextRequest) {
+  const routeClient = createRouteClient(req);
+  return routeClient.auth.getUser().then((d) => d.data?.user ?? null);
+}
+
+export async function POST(req: NextRequest) {
+  const { messages, systemPrompt, botId } = await req.json();
+
+  if (!messages || !systemPrompt) {
+    return Response.json({ error: "Missing messages or systemPrompt" }, { status: 400 });
+  }
+
+  const user = await getUser(req);
+  const supabase = createServiceClient();
+
+  // 1. 查找或创建聊天会话（复用同一次对话）
+    let sessionId = "";
+    if (user && botId) {
+        const { data: existingSession } = await supabase
+          .from("chat_sessions")
+          .select("id")
+          .eq("user_id", user.id)
+          .eq("bot_id", botId)
+          .order("created_at", { ascending: false })
+          .limit(1)
+          .maybeSingle();
+
+        if (existingSession) {
+          sessionId = existingSession.id;
+        } else {
+          const { data: newSession } = await supabase
+            .from("chat_sessions")
+            .insert({ user_id: user.id, bot_id: botId })
+            .select("id")
+            .single();
+          sessionId = newSession?.id || "";
+        }
+    }
+
+    // 2. 保存用户消息
+    const lastUserMsg = messages[messages.length - 1];
+    if (lastUserMsg?.role === "user" && lastUserMsg?.content) {
+      await supabase.from("messages").insert({
+        session_id: sessionId,
+        role: "user",
+        content: lastUserMsg.content,
+      });
+    }
+
+  // 3. 读取记忆
+  let memoryNotes = "";
+  if (user && botId && sessionId) {
+    const { data } = await supabase
+      .from("user_bot_relations")
+      .select("memory_notes")
+      .eq("user_id", user.id)
+      .eq("bot_id", botId)
+      .maybeSingle();
+    memoryNotes = data?.memory_notes ?? "";
+  }
+
+  const fullSystemPrompt = memoryNotes
+    ? `${systemPrompt}\n\n关于当前用户的备忘信息（请在对话中自然引用，但不要刻意提起）：\n${memoryNotes}`
+    : systemPrompt;
+
+  const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+    baseURL: process.env.OPENAI_BASE_URL,
+  });
+
+  const fullMessages = [
+    { role: "system", content: fullSystemPrompt },
+    ...messages,
+  ];
+
+  const tools = user && botId ? [{
+    type: "function" as const,
+    function: {
+      name: "save_memory",
+      description: "当用户要求你记住某些信息、或用户分享了值得长期记录的个人信息时调用此函数。将信息保存到持久记忆中，以便在未来的对话中引用。只在用户明确要求'记住'、或提供了重要的个人事实（如生日、喜好、经历等）时调用。",
+      parameters: {
+        type: "object",
+        properties: {
+          memory_content: {
+            type: "string",
+            description: "要保存的记忆内容，应为简洁的事实陈述。例如：'用户生日是5月20号，喜欢火锅和篮球。'",
+          },
+        },
+        required: ["memory_content"],
+      },
+    },
+  }] : undefined;
+
+  const stream = await openai.chat.completions.create({
+    model: process.env.OPENAI_MODEL || "gpt-3.5-turbo",
+    messages: fullMessages as OpenAI.Chat.Completions.ChatCompletionMessageParam[],
+    temperature: 0.7,
+    max_tokens: 1024,
+    top_p: 0.9,
+    frequency_penalty: 0,
+    stream: true,
+    tools,
+    tool_choice: tools ? "auto" : undefined,
+  });
+
+  const encoder = new TextEncoder();
+  const readable = new ReadableStream({
+    async start(controller) {
+      const toolCallMap = new Map<number, { id: string; name: string; arguments: string }>();
+      let streamedContent = "";
+
+      try {
+        for await (const chunk of stream) {
+          const delta = chunk.choices[0]?.delta;
+
+          if (delta?.content) {
+            streamedContent += delta.content;
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ content: delta.content })}\n\n`));
+          }
+
+          if (delta?.tool_calls) {
+            for (const tc of delta.tool_calls) {
+              const idx = tc.index;
+              if (!toolCallMap.has(idx)) {
+                toolCallMap.set(idx, { id: tc.id || "", name: "", arguments: "" });
+              }
+              const acc = toolCallMap.get(idx)!;
+              if (tc.id) acc.id = tc.id;
+              if (tc.function?.name) acc.name += tc.function.name;
+              if (tc.function?.arguments) acc.arguments += tc.function.arguments;
+            }
+          }
+        }
+
+        // 4. 保存 AI 回复
+        if (sessionId && streamedContent) {
+          await supabase.from("messages").insert({
+            session_id: sessionId,
+            role: "assistant",
+            content: streamedContent,
+          });
+        }
+
+        // 处理 tool calls（保存记忆）
+        if (toolCallMap.size > 0 && user && botId) {
+          const toolCalls = Array.from(toolCallMap.values());
+
+          const assistantMessage: any = {
+            role: "assistant",
+            content: streamedContent || null,
+            tool_calls: toolCalls.map((tc) => ({
+              id: tc.id,
+              type: "function",
+              function: { name: tc.name, arguments: tc.arguments },
+            })),
+          };
+
+          const toolMessages: any[] = [];
+          let memoryWasSaved = false;
+
+          for (const tc of toolCalls) {
+            if (tc.name === "save_memory") {
+              try {
+                const args = JSON.parse(tc.arguments);
+                const newMemory = args.memory_content;
+                const updatedMemory = memoryNotes
+                  ? `${memoryNotes}\n${newMemory}`
+                  : newMemory;
+
+                await supabase
+                  .from("user_bot_relations")
+                  .upsert(
+                    { user_id: user.id, bot_id: botId, memory_notes: updatedMemory },
+                    { onConflict: "user_id,bot_id" }
+                  );
+
+                memoryWasSaved = true;
+                toolMessages.push({
+                  role: "tool",
+                  tool_call_id: tc.id,
+                  content: `已保存。当前记忆：\n${updatedMemory}`,
+                });
+              } catch {
+                toolMessages.push({
+                  role: "tool",
+                  tool_call_id: tc.id,
+                  content: "保存失败，请提示用户稍后重试。",
+                });
+              }
+            }
+          }
+
+          if (memoryWasSaved) {
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ memory_updated: true })}\n\n`));
+          }
+
+          const followUpMessages = [
+            ...fullMessages,
+            assistantMessage,
+            ...toolMessages,
+          ];
+
+          let followUpContent = "";
+          const followUpStream = await openai.chat.completions.create({
+            model: process.env.OPENAI_MODEL || "gpt-3.5-turbo",
+            messages: followUpMessages as any,
+            temperature: 0.7,
+            max_tokens: 1024,
+            top_p: 0.9,
+            frequency_penalty: 0,
+            stream: true,
+          });
+
+          for await (const chunk of followUpStream) {
+            const content = chunk.choices[0]?.delta?.content;
+            if (content) {
+              followUpContent += content;
+              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ content })}\n\n`));
+            }
+          }
+
+          if (sessionId && followUpContent) {
+            await supabase.from("messages").insert({
+              session_id: sessionId,
+              role: "assistant",
+              content: followUpContent,
+            });
+          }
+        }
+
+        // 5. 发送 sessionId 给前端
+        if (sessionId) {
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ sessionId })}\n\n`));
+        }
+
+        controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+        controller.close();
+      } catch (e) {
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ error: "流式响应中断" })}\n\n`));
+        controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+        controller.close();
+      }
+    },
+  });
+
+  return new Response(readable, {
+    headers: {
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+      Connection: "keep-alive",
+    },
+  });
+}
+</file>
+
+<file path="src/app/auth/login/page.tsx">
+import { AuthForm } from "@/components/auth/AuthForm";
+
+export default function LoginPage() {
+  return (
+    <div className="min-h-screen flex items-center justify-center p-4">
+      <AuthForm mode="login" />
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/auth/register/page.tsx">
+import { AuthForm } from "@/components/auth/AuthForm";
+
+export default function RegisterPage() {
+  return (
+    <div className="min-h-screen flex items-center justify-center p-4">
+      <AuthForm mode="register" />
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/bot/[slug]/ChatWrapper.tsx">
+"use client";
+
+import { ChatInterface } from "@/components/chat/ChatInterface";
+
+interface ChatWrapperProps {
+  bot: {
+    id: string;
+    name: string;
+    avatar_url: string | null;
+    system_prompt: string;
+    category: string | null;
+    speaking_style: string | null;
+    visibility: string | null;
+  };
+}
+
+export function ChatWrapper({ bot }: ChatWrapperProps) {
+  return (
+    <div className="h-screen flex flex-col bg-white">
+      <ChatInterface
+        bot={{
+          id: bot.id,
+          name: bot.name,
+          avatar_url: bot.avatar_url,
+          systemPrompt: bot.system_prompt,
+          category: bot.category,
+          speakingStyle: bot.speaking_style,
+          visibility: bot.visibility,
+        }}
+      />
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/bot/[slug]/dashboard/DashboardClient.tsx">
+"use client";
+
+    import { useEffect, useState } from "react";
+    import { useRouter } from "next/navigation";
+    import { Button } from "@/components/ui/button";
+    import { ArrowLeft, RefreshCw } from "lucide-react";
+    import { StatsCards } from "@/components/dashboard/StatsCards";
+    import { EmotionChart } from "@/components/dashboard/EmotionChart";
+    import { KeywordCloud } from "@/components/dashboard/KeywordCloud";
+    import { SessionList } from "@/components/dashboard/SessionList";
+
+    interface DashboardClientProps {
+      botName: string;
+      botId: string;
+    }
+
+    export function DashboardClient({ botName, botId }: DashboardClientProps) {
+      const router = useRouter();
+      const [stats, setStats] = useState<any>(null);
+      const [loading, setLoading] = useState(true);
+
+      useEffect(() => {
+      console.log("fetching:", `/api/analytics/stats?botId=${botId}&days=30`)  
+      fetch(`/api/analytics/stats?botId=${botId}&days=30`)
+          .then((r) => {
+            if (!r.ok) throw new Error("加载失败");
+            return r.json();
+          })
+          .then((data) => setStats(data))
+          .catch(() => setStats(null))
+          .finally(() => setLoading(false));
+      }, [botId]);
+
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-amber-50/50 to-white">
+          <div className="max-w-5xl mx-auto p-4 sm:p-8 space-y-6">
+            {/* Header */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <Button variant="ghost" size="sm" onClick={() => router.back()}>
+                  <ArrowLeft className="w-4 h-4 mr-1" />
+                  返回
+                </Button>
+                <div>
+                  <h1 className="text-2xl font-bold">{botName} 的仪表盘</h1>
+                  <p className="text-muted-foreground text-sm">
+                    查看用户互动数据和情绪状态
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {loading ? (
+              <div className="text-center py-20 text-muted-foreground">
+                加载中...
+              </div>
+            ) : !stats ? (
+              <div className="text-center py-20 text-muted-foreground">
+                加载统计失败，请重试
+              </div>
+            ) : (
+              <>
+                {/* 概览卡片 */}
+                <StatsCards
+                  totalUsers={stats.overview.totalUsers}
+                  totalSessions={stats.overview.totalSessions}
+                  totalMessages={stats.overview.totalMessages}
+                  avgEmotionScore={stats.overview.avgEmotionScore}
+                />
+
+                {/*图表区域：两列布局*/}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <EmotionChart dailyStats={stats.dailyStats} />
+                  <KeywordCloud
+                    keywords={
+                      stats.dailyStats?.length > 0
+                        ? stats.dailyStats[stats.dailyStats.length - 1].topKeywords || []
+                        : []
+                    }
+                  />
+                </div>
+
+                {/* 最近对话 */}
+                <SessionList sessions={stats.recentSessions || []} />
+              </>
+            )}
+          </div>
+        </div>
+      );
+    }
+</file>
+
+<file path="src/app/bot/[slug]/dashboard/page.tsx">
+import { notFound, redirect } from "next/navigation";
+    import { createClient } from "@/lib/supabase/server";
+    import { createServiceClient } from "@/lib/supabase/service";
+    import { DashboardClient } from "./DashboardClient";
+
+    export const dynamic = "force-dynamic";
+
+    interface PageProps {
+      params: Promise<{ slug: string }>;
+    }
+
+    export default async function DashboardPage({ params }: PageProps) {
+      const rawSlug = (await params).slug;
+      const slug = decodeURIComponent(rawSlug);
+
+      // 查 Bot
+      const serviceClient = createServiceClient();
+      const { data: bots } = await serviceClient
+        .from("bots")
+        .select("*")
+        .eq("slug", slug);
+
+      if (!bots || bots.length === 0) {
+        notFound();
+      }
+
+      const bot = bots[0];
+
+      // 只有创建者能看仪表盘
+      const serverClient = await createClient();
+      const { data: authData } = await serverClient.auth.getUser();
+      const user = authData?.user ?? null;
+
+      if (!user || bot.creator_id !== user.id) {
+        redirect("/auth/login");
+      }
+
+      // 获取统计数据
+      return <DashboardClient botName={bot.name} botId={bot.id} />;
+    }
+</file>
+
+<file path="src/app/bot/[slug]/not-found.tsx">
+import Link from "next/link";
+
+export default function BotNotFound() {
+  return (
+    <div className="h-screen flex flex-col items-center justify-center bg-amber-50/30">
+      <div className="text-center space-y-4">
+        <p className="text-6xl">🤖</p>
+        <h1 className="text-2xl font-semibold text-gray-800">找不到这个 Bot</h1>
+        <p className="text-gray-500">该 Bot 可能已被删除，或链接地址错误。</p>
+        <Link
+          href="/"
+          className="inline-block mt-4 px-6 py-2 rounded-lg bg-amber-500 text-white hover:bg-amber-600 transition-colors"
+        >
+          返回首页
+        </Link>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/bot/[slug]/page.tsx">
+import { notFound } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import { createServiceClient } from "@/lib/supabase/service";
+import { ChatWrapper } from "./ChatWrapper";
+
+export const dynamic = "force-dynamic";
+
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export default async function BotPage({ params }: PageProps) {
+  const rawSlug = (await params).slug;
+  let slug = rawSlug;
+  try {
+    slug = decodeURIComponent(rawSlug);
+  } catch {
+    // 已解码则忽略
+  }
+
+  // 用 Service Role 查 bot（确保数据存在），再用认证客户端做权限判断
+  const serviceClient = createServiceClient();
+  const { data: bots, error } = await serviceClient
+    .from("bots")
+    .select("*")
+    .eq("slug", slug);
+
+  if (error || !bots || bots.length === 0) {
+    notFound();
+  }
+
+  const bot = bots[0];
+
+  // 公开发布 → 任何人可看
+  if (bot.visibility === "public" && bot.published) {
+    return (
+      <div className="h-screen flex flex-col">
+        <ChatWrapper bot={bot} />
+      </div>
+    );
+  }
+
+  // 非公开 bot → 必须登录
+  const serverClient = await createClient();
+  const { data: authData } = await serverClient.auth.getUser();
+  const user = authData?.user ?? null;
+
+  if (!user) {
+    notFound();
+  }
+
+  // 创建者 → 可看自己的任何 bot
+  if (bot.creator_id === user.id) {
+    return (
+      <div className="h-screen flex flex-col">
+        <ChatWrapper bot={bot} />
+      </div>
+    );
+  }
+
+  // 定制 bot → 检查是否在权限表中
+  if (bot.visibility === "specific_users" && bot.published && user.email) {
+    const { data: perms } = await serviceClient
+      .from("bot_permissions")
+      .select("id")
+      .eq("bot_id", bot.id)
+      .eq("allowed_email", user.email)
+      .limit(1);
+
+    if (perms && perms.length > 0) {
+      return (
+        <div className="h-screen flex flex-col">
+          <ChatWrapper bot={bot} />
+        </div>
+      );
+    }
+  }
+
+  // 无权限
+  notFound();
+}
+</file>
+
+<file path="src/app/builder/start/page.tsx">
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { generateSystemPrompt } from "@/lib/prompt-generator";
+import { DEFAULT_BOT_FORM, type BotFormData } from "@/lib/bot-types";
+import { WizardProgress } from "@/components/builder/WizardProgress";
+import { Step1Identity } from "@/components/builder/Step1Identity";
+import { Step2BotType } from "@/components/builder/Step2BotType";
+import { Step3Customize } from "@/components/builder/Step3Customize";
+import { Step4Advanced } from "@/components/builder/Step4Advanced";
+import { Step4Visibility } from "@/components/builder/Step4Visibility";
+import { BotPreview } from "@/components/builder/BotPreview";
+
+export default function BuilderPage() {
+  const [step, setStep] = useState(1);
+  const [form, setForm] = useState<BotFormData>(DEFAULT_BOT_FORM);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const updateField = <K extends keyof BotFormData>(
+    field: K,
+    value: BotFormData[K]
+  ) => {
+    setForm((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleCreate = async () => {
+    setLoading(true);
+    const systemPrompt = generateSystemPrompt(form);
+
+    try {
+      const res = await fetch("/api/bots", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...form,
+          age: form.age ? parseInt(form.age) : null,
+          systemPrompt,
+        }),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        toast.error(result.error || "创建失败");
+        setLoading(false);
+        return;
+      }
+
+      toast.success("Bot 创建成功！");
+      router.push("/chat");
+    } catch {
+      toast.error("网络错误，请重试");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-amber-50/50 to-white p-4">
+      <div className="max-w-5xl mx-auto">
+        <WizardProgress current={step} />
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* 左侧：表单 */}
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-xl shadow-sm border p-6">
+              {step === 1 && (
+                <Step1Identity
+                  data={form}
+                  onUpdate={updateField}
+                  onNext={() => setStep(2)}
+                />
+              )}
+              {step === 2 && (
+                <Step2BotType
+                  data={form}
+                  onUpdate={updateField}
+                  onNext={() => setStep(3)}
+                  onBack={() => setStep(1)}
+                />
+              )}
+              {step === 3 && (
+                <Step3Customize
+                  data={form}
+                  onUpdate={updateField}
+                  onNext={() => setStep(4)}
+                  onBack={() => setStep(2)}
+                />
+              )}
+              {step === 4 && (
+                <Step4Advanced
+                  data={form}
+                  onUpdate={updateField}
+                  onNext={() => setStep(5)}
+                  onBack={() => setStep(3)}
+                />
+              )}
+              {step === 5 && (
+                <Step4Visibility
+                  data={form}
+                  onUpdate={updateField}
+                  onSubmit={handleCreate}
+                  onBack={() => setStep(4)}
+                  loading={loading}
+                />
+              )}
+            </div>
+          </div>
+
+          {/* 右侧：预览 */}
+          <div className="lg:col-span-1">
+            <BotPreview data={form} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/chat/page.tsx">
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/hooks/use-auth";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { LogOut, Plus, Sparkles, Store } from "lucide-react";
+
+type BotCategory = "private" | "specific" | "relatedPublic";
+
+export default function ChatPage() {
+  const { user, loading: authLoading, signOut } = useAuth();
+  const [allBots, setAllBots] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [tab, setTab] = useState<BotCategory>("specific");
+  const router = useRouter();
+
+  useEffect(() => {
+    if (authLoading) return;
+    if (!user) {
+      router.push("/auth/login");
+      return;
+    }
+    loadBots();
+  }, [user, authLoading]);
+
+  const loadBots = async () => {
+    try {
+      const res = await fetch("/api/bots");
+      if (res.ok) {
+        setAllBots(await res.json());
+      }
+    } catch {
+      setAllBots([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 分组
+  const privateBots = allBots.filter(
+    (b) => b.visibility === "private" && b.creator_id === user?.id
+  );
+  const specificBots = allBots.filter(
+    (b) => b.visibility === "specific_users"
+  );
+  const relatedPublicBots = allBots.filter(
+    (b) => b.visibility === "public"
+  );
+
+  // 自动选中第一个非空 tab
+  useEffect(() => {
+    if (specificBots.length > 0) setTab("specific");
+    else if (privateBots.length > 0) setTab("private");
+    else if (relatedPublicBots.length > 0) setTab("relatedPublic");
+  }, [specificBots.length, privateBots.length, relatedPublicBots.length]);
+
+  const currentBots =
+    tab === "private"
+      ? privateBots
+      : tab === "specific"
+      ? specificBots
+      : relatedPublicBots;
+
+  if (authLoading || loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-pulse text-muted-foreground">Loading...</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-amber-50/50 to-white">
+      <div className="max-w-4xl mx-auto p-4 sm:p-8">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h1 className="text-2xl font-bold">我的 Bot</h1>
+            <p className="text-muted-foreground text-sm">
+              管理和对话你的 AI 伙伴
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => router.push("/market")}
+            >
+              <Store className="w-4 h-4 mr-1" />
+              市场
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => router.push("/builder/start")}
+            >
+              <Plus className="w-4 h-4 mr-1" />
+              创建
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => signOut()}>
+              <LogOut className="w-4 h-4" />
+            </Button>
+          </div>
+        </div>
+
+        {/* Tabs */}
+        <Tabs value={tab} onValueChange={(v) => setTab(v as BotCategory)} className="mb-6">
+          <TabsList>
+            <TabsTrigger value="specific">
+              定制 ({specificBots.length})
+            </TabsTrigger>
+            <TabsTrigger value="private">
+              私人 ({privateBots.length})
+            </TabsTrigger>
+            <TabsTrigger value="relatedPublic">
+              公开 ({relatedPublicBots.length})
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
+
+        {/* Bot List */}
+        {currentBots.length === 0 ? (
+          <Card className="p-12 text-center space-y-4">
+            <div className="text-4xl">🤖</div>
+            <div className="text-muted-foreground">
+              {tab === "private"
+                ? "还没有私人的 Bot"
+                : tab === "specific"
+                ? "还没有定制的 Bot"
+                : "还没有公开 Bot，去市场看看吧"}
+            </div>
+            <Button onClick={() => router.push(tab === "relatedPublic" ? "/market" : "/builder/start")}>
+              <Sparkles className="w-4 h-4 mr-1" />
+              {tab === "relatedPublic" ? "去市场" : "创建 Bot"}
+            </Button>
+          </Card>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {currentBots.map((bot) => (
+              <Card
+                key={bot.id}
+                className="p-4 cursor-pointer hover:shadow-md transition-all"
+                onClick={() => router.push(`/bot/${bot.slug}`)}
+              >
+                <div className="flex items-center gap-3">
+                  <Avatar className="w-10 h-10">
+                    <AvatarFallback className="bg-primary/10 text-primary">
+                      {(bot.name || "AI").slice(0, 2).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-medium truncate">{bot.name}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {bot.category || "custom"}
+                    </div>
+                  </div>
+                  <Badge variant={bot.visibility === "public" ? "default" : "secondary"} className="text-xs">
+                    {bot.visibility === "public" ? "公开" : bot.visibility === "private" ? "私人" : "定制"}
+                  </Badge>
+                </div>
+                {bot.personality && (
+                  <p className="text-xs text-muted-foreground mt-2 line-clamp-2">
+                    {bot.personality}
+                  </p>
+                )}
+                {bot.creator_id === user?.id && (
+                  <div className="mt-2 flex justify-end">
+                    <span
+                      className="text-xs text-primary hover:underline"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        router.push(`/bot/${bot.slug}/dashboard`)
+                      }}
+                    >
+                      📊 仪表盘
+                    </span>
+                  </div>
+                )}
+              </Card>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/globals.css">
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* 限制 Tailwind 扫描范围，避免读取 Windows NUL 设备文件 */
+@source "../../src/**/*.{ts,tsx,js,jsx}";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+</file>
+
+<file path="src/app/layout.tsx">
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from "@/components/ui/sonner";
+import { AuthProvider } from "@/lib/hooks/use-auth";
+import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "许小熊 AI — Create Your Own AI",
+  description: "Build a personalized AI companion and share it with others.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html
+      lang="zh-CN"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col">
+        <AuthProvider>
+          {children}
+          <Toaster />
+        </AuthProvider>
+      </body>
+    </html>
+  );
+}
+</file>
+
+<file path="src/app/market/page.tsx">
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/hooks/use-auth";
+import { Card } from "@/components/ui/card";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Sparkles, ArrowLeft, MessageCircle } from "lucide-react";
+
+export default function MarketPage() {
+  const { user, loading: authLoading } = useAuth();
+  const [bots, setBots] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (authLoading) return;
+    if (!user) {
+      router.push("/auth/login");
+      return;
+    }
+    loadMarket();
+  }, [user, authLoading]);
+
+  const loadMarket = async () => {
+    try {
+      const res = await fetch("/api/bots/market");
+      if (res.ok) {
+        setBots(await res.json());
+      }
+    } catch {
+      setBots([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (authLoading || loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-pulse text-muted-foreground">Loading...</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-amber-50/50 to-white">
+      <div className="max-w-5xl mx-auto p-4 sm:p-8">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-4">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => router.push("/chat")}
+            >
+              <ArrowLeft className="w-4 h-4 mr-1" />
+              返回
+            </Button>
+            <div>
+              <h1 className="text-2xl font-bold">Bot 市场</h1>
+              <p className="text-muted-foreground text-sm">
+                发现更多有趣的 AI 伙伴
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Bot Grid */}
+        {bots.length === 0 ? (
+          <Card className="p-12 text-center space-y-4">
+            <div className="text-4xl">📭</div>
+            <div className="text-muted-foreground">还没有公开的 Bot</div>
+            <Button onClick={() => router.push("/builder/start")}>
+              <Sparkles className="w-4 h-4 mr-1" />
+              创建第一个 Bot
+            </Button>
+          </Card>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {bots.map((bot) => (
+              <Card
+                key={bot.id}
+                className="p-4 cursor-pointer hover:shadow-md transition-all"
+                onClick={() => router.push(`/bot/${bot.slug}`)}
+              >
+                <div className="flex items-center gap-3">
+                  <Avatar className="w-10 h-10">
+                    <AvatarFallback className="bg-primary/10 text-primary">
+                      {(bot.name || "AI").slice(0, 2).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-medium truncate">{bot.name}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {bot.category || "custom"}
+                    </div>
+                  </div>
+                  <Badge variant="secondary" className="text-xs">
+                    <MessageCircle className="w-3 h-3 mr-1" />
+                    对话
+                  </Badge>
+                </div>
+                {bot.personality && (
+                  <p className="text-xs text-muted-foreground mt-2 line-clamp-2">
+                    {bot.personality}
+                  </p>
+                )}
+              </Card>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/not-found.tsx">
+import Link from "next/link";
+
+export default function NotFound() {
+  return (
+    <div className="h-screen flex flex-col items-center justify-center bg-amber-50/30">
+      <div className="text-center space-y-4">
+        <p className="text-6xl">🔍</p>
+        <h1 className="text-2xl font-semibold text-gray-800">页面不存在</h1>
+        <p className="text-gray-500">您访问的页面不存在或已被移除。</p>
+        <Link
+          href="/"
+          className="inline-block mt-4 px-6 py-2 rounded-lg bg-amber-500 text-white hover:bg-amber-600 transition-colors"
+        >
+          返回首页
+        </Link>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/page.tsx">
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/hooks/use-auth";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { MessageCircle, Sparkles, Store } from "lucide-react";
+
+export default function Home() {
+  const { user, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && user) {
+      router.replace("/chat");
+    }
+  }, [user, loading, router]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-pulse text-muted-foreground">Loading...</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 via-white to-amber-100 p-4">
+      <Card className="w-full max-w-lg p-8 sm:p-12 text-center space-y-8 shadow-lg border-0">
+        <div className="space-y-3">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">
+            Create or Use Your Own AI
+          </h1>
+          <p className="text-muted-foreground text-lg">
+            创建专属 AI 伙伴，或与已有的 AI 对话
+          </p>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button
+            size="lg"
+            variant="default"
+            className="flex-1 h-14 text-base gap-2"
+            onClick={() => router.push("/chat")}
+          >
+            <MessageCircle className="w-5 h-5" />
+            使用 AI
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="flex-1 h-14 text-base gap-2"
+            onClick={() => router.push("/market")}
+          >
+            <Store className="w-5 h-5" />
+            Bot 市场
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="flex-1 h-14 text-base gap-2"
+            onClick={() => router.push("/builder/start")}
+          >
+            <Sparkles className="w-5 h-5" />
+            创建我的 AI
+          </Button>
+        </div>
+      </Card>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/auth/AuthForm.tsx">
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { toast } from "sonner";
+
+interface AuthFormProps {
+  mode: "login" | "register";
+}
+
+export function AuthForm({ mode }: AuthFormProps) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const supabase = createClient();
+
+  const isLogin = mode === "login";
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    if (isLogin) {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (error) {
+        toast.error(error.message);
+        setLoading(false);
+      } else {
+        router.push("/chat");
+        router.refresh();
+      }
+    } else {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { emailRedirectTo: `${location.origin}/chat` },
+      });
+      if (error) {
+        toast.error(error.message);
+        setLoading(false);
+      } else {
+        toast.success("注册成功！请检查邮箱确认（或直接登录）");
+        router.push("/auth/login");
+      }
+    }
+  };
+
+  return (
+    <Card className="w-full max-w-md">
+      <CardHeader className="text-center">
+        <CardTitle className="text-2xl">
+          {isLogin ? "欢迎回来" : "创建账号"}
+        </CardTitle>
+        <CardDescription>
+          {isLogin ? "登录以管理你的 AI Bot" : "注册后即可创建专属 AI"}
+        </CardDescription>
+      </CardHeader>
+      <form onSubmit={handleSubmit}>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="email">邮箱</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="your@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="password">密码</Label>
+            <Input
+              id="password"
+              type="password"
+              placeholder="至少 6 位"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              minLength={6}
+            />
+          </div>
+        </CardContent>
+        <CardFooter className="flex flex-col gap-3">
+          <Button type="submit" className="w-full" disabled={loading}>
+            {loading ? "处理中..." : isLogin ? "登录" : "注册"}
+          </Button>
+          <p className="text-sm text-muted-foreground">
+            {isLogin ? (
+              <>
+                还没有账号？{" "}
+                <a href="/auth/register" className="text-primary hover:underline">
+                  注册
+                </a>
+              </>
+            ) : (
+              <>
+                已有账号？{" "}
+                <a href="/auth/login" className="text-primary hover:underline">
+                  登录
+                </a>
+              </>
+            )}
+          </p>
+        </CardFooter>
+      </form>
+    </Card>
+  );
+}
+</file>
+
+<file path="src/components/builder/BotPreview.tsx">
+import type { BotFormData } from "@/lib/bot-types";
+import { generateSystemPrompt } from "@/lib/prompt-generator";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+
+interface Props {
+  data: BotFormData;
+}
+
+export function BotPreview({ data }: Props) {
+  const systemPrompt = generateSystemPrompt(data);
+  const initials = (data.name || "AI").slice(0, 2).toUpperCase();
+
+  return (
+    <Card className="sticky top-4">
+      <CardHeader>
+        <CardTitle className="text-lg flex items-center gap-2">
+          实时预览
+          <Badge variant="secondary" className="text-xs">Preview</Badge>
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {/* Bot Profile */}
+        <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
+          <Avatar className="w-12 h-12">
+            <AvatarImage src={data.avatar_url || undefined} />
+            <AvatarFallback className="bg-primary/10 text-primary text-lg">
+              {initials}
+            </AvatarFallback>
+          </Avatar>
+          <div>
+            <div className="font-semibold">{data.name || "未命名 Bot"}</div>
+            <div className="text-xs text-muted-foreground">
+              {data.gender && `${data.gender} · `}
+              {data.age && `${data.age}岁 · `}
+              {data.speakingStyle || "casual"}
+            </div>
+          </div>
+        </div>
+
+        {/* Info Tags */}
+        <div className="flex flex-wrap gap-1">
+          {data.relationship && (
+            <Badge variant="outline">关系：{data.relationship}</Badge>
+          )}
+          {data.identity && (
+            <Badge variant="outline">用户身份：{data.identity}</Badge>
+          )}
+          {data.category && (
+            <Badge variant="outline">类型：{data.category}</Badge>
+          )}
+        </div>
+
+        {/* System Prompt Preview */}
+        <div>
+          <div className="text-xs font-medium text-muted-foreground mb-1">
+            生成的 System Prompt
+          </div>
+          <pre className="text-xs bg-muted p-3 rounded-lg whitespace-pre-wrap leading-relaxed max-h-64 overflow-y-auto">
+            {systemPrompt || "填写信息后自动生成..."}
+          </pre>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+</file>
+
+<file path="src/components/builder/Step1Identity.tsx">
+import { IDENTITY_OPTIONS, type UserIdentity, type BotFormData } from "@/lib/bot-types";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
+interface Props {
+  data: BotFormData;
+  onUpdate: (field: "identity", value: UserIdentity) => void;
+  onNext: () => void;
+}
+
+export function Step1Identity({ data, onUpdate, onNext }: Props) {
+  return (
+    <div className="space-y-6">
+      <CardHeader className="p-0 text-center">
+        <CardTitle className="text-2xl">What best describes you?</CardTitle>
+        <CardDescription>选择你的身份，我们会推荐合适的 Bot 模板</CardDescription>
+      </CardHeader>
+      <CardContent className="p-0">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          {IDENTITY_OPTIONS.map((opt) => (
+            <Card
+              key={opt.value}
+              className={`cursor-pointer text-center p-4 transition-all hover:shadow-md ${
+                data.identity === opt.value
+                  ? "ring-2 ring-primary bg-primary/5"
+                  : "hover:bg-muted/50"
+              }`}
+              onClick={() => onUpdate("identity", opt.value)}
+            >
+              <div className="text-2xl mb-1">{opt.emoji}</div>
+              <div className="font-medium text-sm">{opt.label}</div>
+            </Card>
+          ))}
+        </div>
+      </CardContent>
+      <div className="flex justify-end">
+        <Button onClick={onNext} disabled={!data.identity} size="lg">
+          下一步
+        </Button>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/builder/Step2BotType.tsx">
+import { CATEGORY_OPTIONS, type BotCategory, type BotFormData } from "@/lib/bot-types";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
+interface Props {
+  data: BotFormData;
+  onUpdate: (field: "category", value: BotCategory) => void;
+  onNext: () => void;
+  onBack: () => void;
+}
+
+export function Step2BotType({ data, onUpdate, onNext, onBack }: Props) {
+  return (
+    <div className="space-y-6">
+      <CardHeader className="p-0 text-center">
+        <CardTitle className="text-2xl">What kind of AI do you want?</CardTitle>
+        <CardDescription>选择 Bot 的应用场景</CardDescription>
+      </CardHeader>
+      <CardContent className="p-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {CATEGORY_OPTIONS.map((opt) => (
+            <Card
+              key={opt.value}
+              className={`cursor-pointer p-4 transition-all hover:shadow-md ${
+                data.category === opt.value
+                  ? "ring-2 ring-primary bg-primary/5"
+                  : "hover:bg-muted/50"
+              }`}
+              onClick={() => onUpdate("category", opt.value)}
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">{opt.emoji}</span>
+                <div>
+                  <div className="font-medium">{opt.label}</div>
+                  <div className="text-xs text-muted-foreground">{opt.desc}</div>
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </CardContent>
+      <div className="flex justify-between">
+        <Button variant="outline" onClick={onBack}>
+          上一步
+        </Button>
+        <Button onClick={onNext} disabled={!data.category} size="lg">
+          下一步
+        </Button>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/builder/Step3Customize.tsx">
+import { SPEAKING_STYLE_OPTIONS, type BotFormData, type SpeakingStyle } from "@/lib/bot-types";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
+interface Props {
+  data: BotFormData;
+  onUpdate: <K extends keyof BotFormData>(field: K, value: BotFormData[K]) => void;
+  onNext: () => void;
+  onBack: () => void;
+}
+
+export function Step3Customize({ data, onUpdate, onNext, onBack }: Props) {
+  const valid = data.name.trim().length > 0 && data.personality.trim().length > 0;
+
+  return (
+    <div className="space-y-6">
+      <CardHeader className="p-0 text-center">
+        <CardTitle className="text-2xl">定制你的 AI 人格</CardTitle>
+        <CardDescription>填写以下信息，让 Bot 拥有独特个性</CardDescription>
+      </CardHeader>
+
+      <CardContent className="p-0 space-y-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label htmlFor="name">Bot 名称 *</Label>
+            <Input
+              id="name"
+              placeholder="给你的 Bot 起个名字"
+              value={data.name}
+              onChange={(e) => onUpdate("name", e.target.value)}
+              maxLength={30}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="gender">性别</Label>
+            <Input
+              id="gender"
+              placeholder="如：男、女、无"
+              value={data.gender}
+              onChange={(e) => onUpdate("gender", e.target.value)}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="age">年龄</Label>
+            <Input
+              id="age"
+              type="number"
+              placeholder="如：20"
+              value={data.age}
+              onChange={(e) => onUpdate("age", e.target.value)}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="relationship">与用户的关系</Label>
+            <Input
+              id="relationship"
+              placeholder="如：朋友、导师、助手"
+              value={data.relationship}
+              onChange={(e) => onUpdate("relationship", e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="personality">人格描述 *</Label>
+          <Textarea
+            id="personality"
+            placeholder="描述 Bot 的性格，如：温柔、耐心、像学长一样鼓励人"
+            value={data.personality}
+            onChange={(e) => onUpdate("personality", e.target.value)}
+            rows={3}
+          />
+        </div>
+
+        <div className="space-y-2">
+          <Label>说话风格</Label>
+          <Select
+            value={data.speakingStyle}
+            onValueChange={(v) => onUpdate("speakingStyle", v as SpeakingStyle)}
+          >
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {SPEAKING_STYLE_OPTIONS.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label} — {opt.desc}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="forbidden">禁止事项</Label>
+          <Textarea
+            id="forbidden"
+            placeholder="Bot 绝对不能说的话或做的事，如：不能说脏话、不讨论政治"
+            value={data.forbiddenBehaviors}
+            onChange={(e) => onUpdate("forbiddenBehaviors", e.target.value)}
+            rows={2}
+          />
+        </div>
+      </CardContent>
+
+      <div className="flex justify-between">
+        <Button variant="outline" onClick={onBack}>
+          上一步
+        </Button>
+        <Button onClick={onNext} disabled={!valid} size="lg">
+          下一步
+        </Button>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/builder/Step4Advanced.tsx">
+import type { BotFormData } from "@/lib/bot-types";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
+interface Props {
+  data: BotFormData;
+  onUpdate: <K extends keyof BotFormData>(field: K, value: BotFormData[K]) => void;
+  onNext: () => void;
+  onBack: () => void;
+}
+
+export function Step4Advanced({ data, onUpdate, onNext, onBack }: Props) {
+  const fields: { key: keyof BotFormData; label: string; placeholder: string; rows: number }[] = [
+    {
+      key: "hobbies",
+      label: "喜欢玩什么",
+      placeholder: "例如：英雄联盟、篮球、拼乐高",
+      rows: 2,
+    },
+    {
+      key: "interests",
+      label: "喜欢看什么",
+      placeholder: "例如：科幻片（星际穿越、银翼杀手）、悬疑小说",
+      rows: 2,
+    },
+    {
+      key: "sharedActivities",
+      label: "一起做过的事",
+      placeholder: "例如：一起通关双人成行、去年去了海边",
+      rows: 2,
+    },
+    {
+      key: "dietPreferences",
+      label: "饮食偏好",
+      placeholder: "例如：爱吃辣的，对方最爱吃火锅",
+      rows: 2,
+    },
+    {
+      key: "sleepSchedule",
+      label: "作息习惯",
+      placeholder: "例如：7 点起床，23 点睡觉",
+      rows: 1,
+    },
+    {
+      key: "memorableMoments",
+      label: "最难忘的事",
+      placeholder: "例如：第一次见面在星巴克，那天还下雨了",
+      rows: 2,
+    },
+    {
+      key: "weaknesses",
+      label: "小缺点",
+      placeholder: "例如：赖床、有点路痴",
+      rows: 1,
+    },
+    {
+      key: "anniversaries",
+      label: "纪念日",
+      placeholder: "- 2024-03-15 — 第一次见面\n- 2024-05-20 — 正式在一起\n- 2025-01-01 — 跨年旅行",
+      rows: 4,
+    },
+    {
+      key: "customFaqs",
+      label: "常见问答",
+      placeholder: "问：你会一直陪着我吗？\n答：当然啦，我会一直在这里陪着你！\n\n问：今天过得怎么样？\n答：只要跟你聊天就是最好的一天~",
+      rows: 4,
+    },
+  ];
+
+  return (
+    <div className="space-y-6">
+      <CardHeader className="p-0 text-center">
+        <CardTitle className="text-2xl">充实的 Ta</CardTitle>
+        <CardDescription>
+          帮助 Bot 更了解你（全部选填，可跳过）
+        </CardDescription>
+      </CardHeader>
+
+      <CardContent className="p-0 space-y-4 max-h-[55vh] overflow-y-auto pr-2">
+        {fields.map((f) => (
+          <div key={f.key} className="space-y-1.5">
+            <Label className="text-sm">{f.label}</Label>
+            <Textarea
+              value={data[f.key] as string}
+              onChange={(e) => onUpdate(f.key, e.target.value as any)}
+              placeholder={f.placeholder}
+              rows={f.rows}
+            />
+          </div>
+        ))}
+      </CardContent>
+
+      <div className="flex justify-between">
+        <Button variant="outline" onClick={onBack}>
+          上一步
+        </Button>
+        <Button onClick={onNext}>
+          下一步
+        </Button>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/builder/Step4Visibility.tsx">
+import { useState } from "react";
+import type { BotFormData, Visibility } from "@/lib/bot-types";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Badge } from "@/components/ui/badge";
+import { X } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
+const VISIBILITY_OPTIONS = [
+  { value: "private" as const, label: "私人", desc: "只有你自己可以看到和使用" },
+  { value: "specific_users" as const, label: "定制", desc: "只有你和指定的用户可以使用" },
+  { value: "public" as const, label: "公开", desc: "在市场中展示，所有人都可以使用" },
+];
+
+interface Props {
+  data: BotFormData;
+  onUpdate: <K extends keyof BotFormData>(field: K, value: BotFormData[K]) => void;
+  onSubmit: () => void;
+  onBack: () => void;
+  loading: boolean;
+}
+
+export function Step4Visibility({ data, onUpdate, onSubmit, onBack, loading }: Props) {
+  const [emailInput, setEmailInput] = useState("");
+
+  const addEmail = () => {
+    const email = emailInput.trim();
+    if (email && email.includes("@") && !data.allowedEmails.includes(email)) {
+      onUpdate("allowedEmails", [...data.allowedEmails, email]);
+      setEmailInput("");
+    }
+  };
+
+  const removeEmail = (email: string) => {
+    onUpdate(
+      "allowedEmails",
+      data.allowedEmails.filter((e) => e !== email)
+    );
+  };
+
+  return (
+    <div className="space-y-6">
+      <CardHeader className="p-0 text-center">
+        <CardTitle className="text-2xl">发布 Bot</CardTitle>
+        <CardDescription>设置谁可以使用你的 Bot</CardDescription>
+      </CardHeader>
+
+      <CardContent className="p-0 space-y-4">
+        <RadioGroup
+          value={data.visibility}
+          onValueChange={(v) => onUpdate("visibility", v as Visibility)}
+        >
+          {VISIBILITY_OPTIONS.map((opt) => (
+            <div
+              key={opt.value}
+              className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50 cursor-pointer"
+              onClick={() => onUpdate("visibility", opt.value)}
+            >
+              <RadioGroupItem value={opt.value} id={opt.value} />
+              <Label htmlFor={opt.value} className="cursor-pointer">
+                <div className="font-medium">{opt.label}</div>
+                <div className="text-sm text-muted-foreground">{opt.desc}</div>
+              </Label>
+            </div>
+          ))}
+        </RadioGroup>
+
+        {data.visibility === "specific_users" && (
+          <div className="space-y-2 pl-10">
+            <Label>添加授权邮箱</Label>
+            <div className="flex gap-2">
+              <Input
+                type="email"
+                placeholder="user@example.com"
+                value={emailInput}
+                onChange={(e) => setEmailInput(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addEmail())}
+              />
+              <Button type="button" variant="outline" onClick={addEmail}>
+                添加
+              </Button>
+            </div>
+            {data.allowedEmails.length > 0 && (
+              <div className="flex flex-wrap gap-1 mt-2">
+                {data.allowedEmails.map((email) => (
+                  <Badge key={email} variant="secondary" className="gap-1">
+                    {email}
+                    <X
+                      className="h-3 w-3 cursor-pointer"
+                      onClick={() => removeEmail(email)}
+                    />
+                  </Badge>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+      </CardContent>
+
+      <div className="flex justify-between">
+        <Button variant="outline" onClick={onBack}>
+          上一步
+        </Button>
+        <Button onClick={onSubmit} disabled={loading} size="lg">
+          {loading ? "创建中..." : "创建 Bot"}
+        </Button>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/builder/WizardProgress.tsx">
+const STEPS = [
+  { num: 1, label: "你的身份" },
+  { num: 2, label: "Bot 类型" },
+  { num: 3, label: "基础设定" },
+  { num: 4, label: "充实的 Ta" },
+  { num: 5, label: "发布设置" },
+];
+
+export function WizardProgress({ current }: { current: number }) {
+  return (
+    <div className="flex items-center justify-center gap-2 mb-8">
+      {STEPS.map((s, i) => (
+        <div key={s.num} className="flex items-center gap-2">
+          <div
+            className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
+              current >= s.num
+                ? "bg-primary text-primary-foreground"
+                : "bg-muted text-muted-foreground"
+            }`}
+          >
+            {s.num}
+          </div>
+          <span
+            className={`text-sm hidden sm:inline ${
+              current >= s.num ? "text-foreground font-medium" : "text-muted-foreground"
+            }`}
+          >
+            {s.label}
+          </span>
+          {i < STEPS.length - 1 && (
+            <div
+              className={`w-8 h-[2px] hidden sm:block ${
+                current > s.num ? "bg-primary" : "bg-muted"
+              }`}
+            />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/chat/ChatInterface.tsx">
+"use client";
+
+import { useState, useRef, useEffect, useCallback } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Send, BookOpen, Check, X } from "lucide-react";
+
+interface Message {
+  role: "user" | "assistant";
+  content: string;
+}
+
+interface ChatBotInfo {
+  id?: string;
+  name: string;
+  avatar_url?: string | null;
+  systemPrompt: string;
+  category?: string | null;
+  speakingStyle?: string | null;
+  visibility?: string | null;
+}
+
+interface Props {
+  bot: ChatBotInfo;
+}
+
+export function ChatInterface({ bot }: Props) {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const bottomRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const relationCreated = useRef(false);
+  const sessionIdRef = useRef<string>("");
+
+  // 记忆功能
+  const [memoryNotes, setMemoryNotes] = useState("");
+  const [memoryDraft, setMemoryDraft] = useState("");
+  const [showMemoryEditor, setShowMemoryEditor] = useState(false);
+  const [memorySaving, setMemorySaving] = useState(false);
+
+  const refreshMemory = useCallback(() => {
+    if (!bot.id) return;
+    fetch(`/api/bots/relation?botId=${bot.id}`)
+      .then((r) => r.json())
+      .then((d) => {
+        setMemoryNotes(d.memoryNotes ?? "");
+        setMemoryDraft(d.memoryNotes ?? "");
+      })
+      .catch(() => {});
+  }, [bot.id]);
+
+  useEffect(() => {
+    refreshMemory();
+  }, [refreshMemory]);
+
+  const saveMemory = async () => {
+    if (!bot.id || memorySaving) return;
+    setMemorySaving(true);
+    try {
+      await fetch("/api/bots/relation", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ botId: bot.id, memoryNotes: memoryDraft }),
+      });
+      setMemoryNotes(memoryDraft);
+      setShowMemoryEditor(false);
+    } catch {}
+    setMemorySaving(false);
+  };
+
+  const scrollToBottom = useCallback(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, scrollToBottom]);
+
+  const sendMessage = async () => {
+    const text = input.trim();
+    if (!text || loading) return;
+
+    // 建立用户关联（任何 bot 首次发消息时）
+    if (bot.id && !relationCreated.current) {
+      relationCreated.current = true;
+      fetch("/api/bots/relation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ botId: bot.id }),
+      }).catch(() => {
+        relationCreated.current = false;
+      });
+    }
+
+    const userMessage: Message = { role: "user", content: text };
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
+    setInput("");
+    setLoading(true);
+
+    setMessages([...updatedMessages, { role: "assistant", content: "" }]);
+
+    // 后端负责从 DB 加载记忆并注入 system prompt，前端只传基础 prompt + botId
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: updatedMessages,
+          systemPrompt: bot.systemPrompt,
+          botId: bot.id,
+        }),
+      });
+
+      if (!response.ok) throw new Error("API error");
+
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+      let fullContent = "";
+      let memoryUpdated = false;
+
+      if (reader) {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          const chunk = decoder.decode(value, { stream: true });
+          const lines = chunk.split("\n");
+
+          for (const line of lines) {
+            if (line.startsWith("data: ")) {
+              const data = line.slice(6);
+              if (data === "[DONE]") continue;
+
+              try {
+                const parsed = JSON.parse(data);
+                if (parsed.sessionId) {
+  sessionIdRef.current = parsed.sessionId;
+}
+                if (parsed.memory_updated) {
+                  memoryUpdated = true;
+                }
+                if (parsed.content) {
+                  fullContent += parsed.content;
+                  setMessages((prev) => {
+                    const newMsgs = [...prev];
+                    const lastIdx = newMsgs.length - 1;
+                    if (lastIdx >= 0 && newMsgs[lastIdx].role === "assistant") {
+                      newMsgs[lastIdx] = { ...newMsgs[lastIdx], content: fullContent };
+                    }
+                    return newMsgs;
+                  });
+                }
+              } catch {
+                // skip malformed JSON
+              }
+            }
+          }
+        }
+      }
+
+      // AI 保存了记忆 → 刷新本地状态
+      if (memoryUpdated) {
+        refreshMemory();
+      }
+    } catch {
+      setMessages((prev) => {
+        const newMsgs = [...prev];
+        const lastIdx = newMsgs.length - 1;
+        if (lastIdx >= 0 && newMsgs[lastIdx].role === "assistant") {
+          newMsgs[lastIdx] = { ...newMsgs[lastIdx], content: "抱歉，出了点问题...请重试" };
+        }
+        return newMsgs;
+      });
+    } finally {
+            // AI 回复流结束后，触发分析
+      if (sessionIdRef.current && bot.id) {
+        fetch("/api/analytics/analyze", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            sessionId: sessionIdRef.current,
+            botId: bot.id,
+          }),
+        }).catch(() => {});
+      }
+      setLoading(false);
+    }
+  };
+
+  const initials = (bot.name || "AI").slice(0, 2).toUpperCase();
+
+  return (
+    <div className="flex flex-col h-full max-w-3xl mx-auto w-full">
+      {/* Bot Header */}
+      <div className="flex items-center gap-3 p-4 border-b bg-white/80 backdrop-blur shrink-0">
+        <Avatar className="w-10 h-10">
+          <AvatarImage src={bot.avatar_url || undefined} />
+          <AvatarFallback className="bg-primary/10 text-primary">
+            {initials}
+          </AvatarFallback>
+        </Avatar>
+        <div className="flex-1">
+          <div className="font-semibold">{bot.name}</div>
+          <div className="text-xs text-muted-foreground">
+            {bot.category || "custom"} · {bot.speakingStyle || "casual"}
+          </div>
+        </div>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => setShowMemoryEditor(!showMemoryEditor)}
+          title="Bot 对你的记忆"
+        >
+          <BookOpen className="w-4 h-4" />
+          {memoryNotes && (
+            <span className="ml-1 w-2 h-2 rounded-full bg-amber-500 inline-block" />
+          )}
+        </Button>
+      </div>
+
+      {/* Memory Editor */}
+      {showMemoryEditor && (
+        <div className="p-3 border-b bg-amber-50/50 space-y-2 shrink-0">
+          <p className="text-xs text-muted-foreground">
+            告诉 {bot.name} 关于你的重要信息，它会在对话中记住这些。例如：生日是 5 月 20 号、喜欢看电影和篮球、对猫过敏。
+          </p>
+          <Textarea
+            value={memoryDraft}
+            onChange={(e) => setMemoryDraft(e.target.value)}
+            placeholder="输入希望 Bot 记住的信息..."
+            rows={3}
+            className="text-sm"
+          />
+          <div className="flex gap-2 justify-end">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => {
+                setMemoryDraft(memoryNotes);
+                setShowMemoryEditor(false);
+              }}
+            >
+              <X className="w-3 h-3 mr-1" />
+              取消
+            </Button>
+            <Button size="sm" onClick={saveMemory} disabled={memorySaving}>
+              <Check className="w-3 h-3 mr-1" />
+              保存
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* Messages */}
+      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        {messages.length === 0 && (
+          <div className="text-center text-muted-foreground py-20">
+            <div className="text-4xl mb-3">💬</div>
+            <p>开始和 {bot.name} 聊天吧！</p>
+          </div>
+        )}
+        {messages.map((msg, i) => (
+          <div
+            key={i}
+            className={`flex gap-3 ${msg.role === "user" ? "justify-end" : ""}`}
+          >
+            {msg.role === "assistant" && (
+              <Avatar className="w-8 h-8 shrink-0">
+                <AvatarFallback className="bg-primary/10 text-primary text-xs">
+                  {initials}
+                </AvatarFallback>
+              </Avatar>
+            )}
+            <div
+              className={`max-w-[75%] px-4 py-2 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
+                msg.role === "user"
+                  ? "bg-primary text-primary-foreground rounded-br-md"
+                  : "bg-muted rounded-bl-md"
+              }`}
+            >
+              {msg.content || (
+                <span className="inline-flex gap-1">
+                  <span className="animate-bounce">.</span>
+                  <span className="animate-bounce delay-75">.</span>
+                  <span className="animate-bounce delay-150">.</span>
+                </span>
+              )}
+            </div>
+          </div>
+        ))}
+        <div ref={bottomRef} />
+      </div>
+
+      {/* Input */}
+      <div className="p-4 border-t bg-white/80 backdrop-blur shrink-0">
+        <div className="flex gap-2">
+          <Input
+            ref={inputRef}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+            placeholder="输入消息..."
+            disabled={loading}
+            className="flex-1"
+          />
+          <Button onClick={sendMessage} disabled={loading || !input.trim()} size="icon">
+            <Send className="w-4 h-4" />
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/dashboard/EmotionChart.tsx">
+"use client";
+
+    import { useMemo } from "react";
+    import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+    interface EmotionChartProps {
+      dailyStats: Array<{
+        date: string;
+        avgEmotionScore: number | null;
+      }>;
+    }
+
+    export function EmotionChart({ dailyStats }: EmotionChartProps) {
+      const data = useMemo(() => {
+        return dailyStats.map((d) => ({
+          date: d.date.split("-").slice(1).join("/"),
+          score: d.avgEmotionScore ?? 0,
+        }));
+      }, [dailyStats]);
+
+      if (data.length === 0) {
+        return (
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-sm">情绪趋势</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground text-sm text-center py-8">暂无数据</p>
+            </CardContent>
+          </Card>
+        );
+      }
+
+      const maxScore = Math.max(...data.map((d) => Math.abs(d.score)), 0.5);
+
+      return (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-sm">情绪趋势（过去 {data.length} 天）</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="relative h-40">
+              {/* Y 轴标签 */}
+              <div className="absolute -left-2 -top-1 text-[10px] text-muted-foreground">+1</div>
+              <div className="absolute -left-2 bottom-0 text-[10px] text-muted-foreground">-1</div>
+              {/* 中线 */}
+              <div className="absolute left-6 right-0 top-1/2 border-t border-dashed border-muted-foreground/30" />
+
+              {/* 柱状图 */}
+              <div className="flex items-end gap-1 h-full pl-8 pr-2">
+                {data.map((d, i) => {
+                  const heightPct = (Math.abs(d.score) / maxScore) * 50;
+                  const isPositive = d.score >= 0;
+
+                  return (
+                    <div
+                      key={i}
+                      className="flex-1 flex flex-col items-center justify-end h-full"
+                    >
+                      <div
+                        className={`w-full rounded-t-sm transition-all ${
+                          isPositive ? "bg-green-400" : "bg-red-400"
+                        }`}
+                        style={{
+                          height: `${Math.max(heightPct, 2)}%`,
+                          marginTop: isPositive ? "auto" : undefined,
+                          marginBottom: isPositive ? undefined : "auto",
+                          transform: isPositive ? undefined : "rotate(180deg)",
+                        }}
+                        title={`${d.date}: ${d.score.toFixed(2)}`}
+                      />
+                      <span className="text-[10px] text-muted-foreground mt-1 truncate w-full text-center">
+                        {d.date}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      );
+    }
+</file>
+
+<file path="src/components/dashboard/KeywordCloud.tsx">
+"use client";
+
+    import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+    import { Badge } from "@/components/ui/badge";
+
+    interface KeywordCloudProps {
+      keywords: Array<{ keyword: string; count: number }>;
+    }
+
+    export function KeywordCloud({ keywords }: KeywordCloudProps) {
+      if (keywords.length === 0) {
+        return (
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-sm">话题关键词</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground text-sm text-center py-8">暂无数据</p>
+            </CardContent>
+          </Card>
+        );
+      }
+
+      const maxCount = Math.max(...keywords.map((k) => k.count));
+
+      return (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-sm">话题关键词</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-wrap gap-2">
+              {keywords.map((kw) => {
+                const ratio = kw.count / maxCount;
+                const size = ratio > 0.8 ? "text-base" : ratio > 0.5 ? "text-sm" : "text-xs";
+                const opacity = Math.max(0.4, ratio);
+
+                return (
+                  <Badge
+                    key={kw.keyword}
+                    variant="secondary"
+                    className={`${size} px-2 py-1`}
+                    style={{ opacity }}
+                  >
+                    {kw.keyword}
+                    <span className="ml-1 text-muted-foreground">({kw.count})</span>
+                  </Badge>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
+      );
+    }
+</file>
+
+<file path="src/components/dashboard/SessionList.tsx">
+"use client";
+
+    import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+    import { Badge } from "@/components/ui/badge";
+
+    interface SessionItem {
+      id: string;
+      userId: string;
+      emotion: string | null;
+      emotionScore: number | null;
+      keywords: string[] | null;
+      summary: string | null;
+      messageCount: number | null;
+      analyzedAt: string | null;
+    }
+
+    interface SessionListProps {
+      sessions: SessionItem[];
+    }
+
+    const EMOTION_EMOJI: Record<string, string> = {
+      happy: "😊",
+      sad: "😢",
+      anxious: "😰",
+      angry: "😠",
+      neutral: "😐",
+    };
+
+    export function SessionList({ sessions }: SessionListProps) {
+      if (sessions.length === 0) {
+        return (
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-sm">最近对话</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground text-sm text-center py-8">暂无对话数据</p>
+            </CardContent>
+          </Card>
+        );
+      }
+
+      return (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-sm">最近对话（{sessions.length}）</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              {sessions.map((s) => (
+                <div
+                  key={s.id}
+                  className="flex items-start gap-3 p-2 rounded-lg hover:bg-muted/50 transition-colors"
+                >
+                  <span className="text-lg shrink-0">
+                    {EMOTION_EMOJI[s.emotion || "neutral"] || "😐"}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm truncate">{s.summary || "（无摘要）"}</p>
+                    <div className="flex flex-wrap gap-1 mt-1">
+                      {(s.keywords || []).slice(0, 3).map((kw) => (
+                        <Badge key={kw} variant="outline" className="text-[10px] px-1.5 py-0">
+                          {kw}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                  <span className="text-xs text-muted-foreground shrink-0">
+                    {s.messageCount}条
+                  </span>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      );
+    }
+</file>
+
+<file path="src/components/dashboard/StatsCards.tsx">
+"use client";
+
+    import { Users, MessageSquare, Brain, Activity } from "lucide-react";
+    import { Card, CardContent } from "@/components/ui/card";
+
+    interface StatsCardsProps {
+      totalUsers: number;
+      totalSessions: number;
+      totalMessages?: number;
+      avgEmotionScore: number;
+    }
+
+    export function StatsCards({ totalUsers, totalSessions, totalMessages, avgEmotionScore }: StatsCardsProps) {
+      const emotionLabel = avgEmotionScore > 0.3 ? "积极" : avgEmotionScore < -0.3 ? "消极" : "中性";
+      const emotionColor = avgEmotionScore > 0.3 ? "text-green-600" : avgEmotionScore < -0.3 ? "text-red-500" : "text-yellow-500";
+
+      const cards = [
+        { label: "互动用户", value: totalUsers, icon: Users, color: "text-blue-500" },
+        { label: "对话次数", value: totalSessions, icon: MessageSquare, color: "text-purple-500" },
+        { label: "消息总数", value: totalMessages ?? "-", icon: Activity, color: "text-cyan-500" },
+        { label: "平均情绪", value: avgEmotionScore.toFixed(2), sub: emotionLabel, icon: Brain, color: emotionColor },
+      ];
+
+      return (
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {cards.map((card) => (
+            <Card key={card.label}>
+              <CardContent className="p-4 flex items-center gap-3">
+                <div className={`${card.color} bg-muted rounded-lg p-2`}>
+                  <card.icon className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-2xl font-bold">{card.value}</div>
+                  <div className="text-xs text-muted-foreground">
+                    {card.label}
+                    {card.sub && <span className={`ml-1 ${card.color}`}>({card.sub})</span>}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      );
+    }
+</file>
+
+<file path="src/components/ui/avatar.tsx">
+"use client"
+
+import * as React from "react"
+import { Avatar as AvatarPrimitive } from "@base-ui/react/avatar"
+
+import { cn } from "@/lib/utils"
+
+function Avatar({
+  className,
+  size = "default",
+  ...props
+}: AvatarPrimitive.Root.Props & {
+  size?: "default" | "sm" | "lg"
+}) {
+  return (
+    <AvatarPrimitive.Root
+      data-slot="avatar"
+      data-size={size}
+      className={cn(
+        "group/avatar relative flex size-8 shrink-0 rounded-full select-none after:absolute after:inset-0 after:rounded-full after:border after:border-border after:mix-blend-darken data-[size=lg]:size-10 data-[size=sm]:size-6 dark:after:mix-blend-lighten",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function AvatarImage({ className, ...props }: AvatarPrimitive.Image.Props) {
+  return (
+    <AvatarPrimitive.Image
+      data-slot="avatar-image"
+      className={cn(
+        "aspect-square size-full rounded-full object-cover",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function AvatarFallback({
+  className,
+  ...props
+}: AvatarPrimitive.Fallback.Props) {
+  return (
+    <AvatarPrimitive.Fallback
+      data-slot="avatar-fallback"
+      className={cn(
+        "flex size-full items-center justify-center rounded-full bg-muted text-sm text-muted-foreground group-data-[size=sm]/avatar:text-xs",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function AvatarBadge({ className, ...props }: React.ComponentProps<"span">) {
+  return (
+    <span
+      data-slot="avatar-badge"
+      className={cn(
+        "absolute right-0 bottom-0 z-10 inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground bg-blend-color ring-2 ring-background select-none",
+        "group-data-[size=sm]/avatar:size-2 group-data-[size=sm]/avatar:[&>svg]:hidden",
+        "group-data-[size=default]/avatar:size-2.5 group-data-[size=default]/avatar:[&>svg]:size-2",
+        "group-data-[size=lg]/avatar:size-3 group-data-[size=lg]/avatar:[&>svg]:size-2",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function AvatarGroup({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="avatar-group"
+      className={cn(
+        "group/avatar-group flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function AvatarGroupCount({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="avatar-group-count"
+      className={cn(
+        "relative flex size-8 shrink-0 items-center justify-center rounded-full bg-muted text-sm text-muted-foreground ring-2 ring-background group-has-data-[size=lg]/avatar-group:size-10 group-has-data-[size=sm]/avatar-group:size-6 [&>svg]:size-4 group-has-data-[size=lg]/avatar-group:[&>svg]:size-5 group-has-data-[size=sm]/avatar-group:[&>svg]:size-3",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export {
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
+  AvatarBadge,
+}
+</file>
+
+<file path="src/components/ui/badge.tsx">
+import { mergeProps } from "@base-ui/react/merge-props"
+import { useRender } from "@base-ui/react/use-render"
+import { cva, type VariantProps } from "class-variance-authority"
+
+import { cn } from "@/lib/utils"
+
+const badgeVariants = cva(
+  "group/badge inline-flex h-5 w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-4xl border border-transparent px-2 py-0.5 text-xs font-medium whitespace-nowrap transition-all focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none [&>svg]:size-3!",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
+        secondary:
+          "bg-secondary text-secondary-foreground [a]:hover:bg-secondary/80",
+        destructive:
+          "bg-destructive/10 text-destructive focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:focus-visible:ring-destructive/40 [a]:hover:bg-destructive/20",
+        outline:
+          "border-border text-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground",
+        ghost:
+          "hover:bg-muted hover:text-muted-foreground dark:hover:bg-muted/50",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+)
+
+function Badge({
+  className,
+  variant = "default",
+  render,
+  ...props
+}: useRender.ComponentProps<"span"> & VariantProps<typeof badgeVariants>) {
+  return useRender({
+    defaultTagName: "span",
+    props: mergeProps<"span">(
+      {
+        className: cn(badgeVariants({ variant }), className),
+      },
+      props
+    ),
+    render,
+    state: {
+      slot: "badge",
+      variant,
+    },
+  })
+}
+
+export { Badge, badgeVariants }
+</file>
+
+<file path="src/components/ui/button.tsx">
+import { Button as ButtonPrimitive } from "@base-ui/react/button"
+import { cva, type VariantProps } from "class-variance-authority"
+
+import { cn } from "@/lib/utils"
+
+const buttonVariants = cva(
+  "group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
+        outline:
+          "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+        ghost:
+          "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
+        destructive:
+          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default:
+          "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+        xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
+        lg: "h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+        icon: "size-8",
+        "icon-xs":
+          "size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
+        "icon-sm":
+          "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
+        "icon-lg": "size-9",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+)
+
+function Button({
+  className,
+  variant = "default",
+  size = "default",
+  ...props
+}: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
+  return (
+    <ButtonPrimitive
+      data-slot="button"
+      className={cn(buttonVariants({ variant, size, className }))}
+      {...props}
+    />
+  )
+}
+
+export { Button, buttonVariants }
+</file>
+
+<file path="src/components/ui/card.tsx">
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+
+function Card({
+  className,
+  size = "default",
+  ...props
+}: React.ComponentProps<"div"> & { size?: "default" | "sm" }) {
+  return (
+    <div
+      data-slot="card"
+      data-size={size}
+      className={cn(
+        "group/card flex flex-col gap-4 overflow-hidden rounded-xl bg-card py-4 text-sm text-card-foreground ring-1 ring-foreground/10 has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:gap-3 data-[size=sm]:py-3 data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-header"
+      className={cn(
+        "group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-xl px-4 group-data-[size=sm]/card:px-3 has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-4 group-data-[size=sm]/card:[.border-b]:pb-3",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-title"
+      className={cn(
+        "font-heading text-base leading-snug font-medium group-data-[size=sm]/card:text-sm",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-description"
+      className={cn("text-sm text-muted-foreground", className)}
+      {...props}
+    />
+  )
+}
+
+function CardAction({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-action"
+      className={cn(
+        "col-start-2 row-span-2 row-start-1 self-start justify-self-end",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function CardContent({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-content"
+      className={cn("px-4 group-data-[size=sm]/card:px-3", className)}
+      {...props}
+    />
+  )
+}
+
+function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-footer"
+      className={cn(
+        "flex items-center rounded-b-xl border-t bg-muted/50 p-4 group-data-[size=sm]/card:p-3",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardAction,
+  CardDescription,
+  CardContent,
+}
+</file>
+
+<file path="src/components/ui/dialog.tsx">
+"use client"
+
+import * as React from "react"
+import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
+
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { XIcon } from "lucide-react"
+
+function Dialog({ ...props }: DialogPrimitive.Root.Props) {
+  return <DialogPrimitive.Root data-slot="dialog" {...props} />
+}
+
+function DialogTrigger({ ...props }: DialogPrimitive.Trigger.Props) {
+  return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />
+}
+
+function DialogPortal({ ...props }: DialogPrimitive.Portal.Props) {
+  return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />
+}
+
+function DialogClose({ ...props }: DialogPrimitive.Close.Props) {
+  return <DialogPrimitive.Close data-slot="dialog-close" {...props} />
+}
+
+function DialogOverlay({
+  className,
+  ...props
+}: DialogPrimitive.Backdrop.Props) {
+  return (
+    <DialogPrimitive.Backdrop
+      data-slot="dialog-overlay"
+      className={cn(
+        "fixed inset-0 isolate z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function DialogContent({
+  className,
+  children,
+  showCloseButton = true,
+  ...props
+}: DialogPrimitive.Popup.Props & {
+  showCloseButton?: boolean
+}) {
+  return (
+    <DialogPortal>
+      <DialogOverlay />
+      <DialogPrimitive.Popup
+        data-slot="dialog-content"
+        className={cn(
+          "fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl bg-popover p-4 text-sm text-popover-foreground ring-1 ring-foreground/10 duration-100 outline-none sm:max-w-sm data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          className
+        )}
+        {...props}
+      >
+        {children}
+        {showCloseButton && (
+          <DialogPrimitive.Close
+            data-slot="dialog-close"
+            render={
+              <Button
+                variant="ghost"
+                className="absolute top-2 right-2"
+                size="icon-sm"
+              />
+            }
+          >
+            <XIcon
+            />
+            <span className="sr-only">Close</span>
+          </DialogPrimitive.Close>
+        )}
+      </DialogPrimitive.Popup>
+    </DialogPortal>
+  )
+}
+
+function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="dialog-header"
+      className={cn("flex flex-col gap-2", className)}
+      {...props}
+    />
+  )
+}
+
+function DialogFooter({
+  className,
+  showCloseButton = false,
+  children,
+  ...props
+}: React.ComponentProps<"div"> & {
+  showCloseButton?: boolean
+}) {
+  return (
+    <div
+      data-slot="dialog-footer"
+      className={cn(
+        "-mx-4 -mb-4 flex flex-col-reverse gap-2 rounded-b-xl border-t bg-muted/50 p-4 sm:flex-row sm:justify-end",
+        className
+      )}
+      {...props}
+    >
+      {children}
+      {showCloseButton && (
+        <DialogPrimitive.Close render={<Button variant="outline" />}>
+          Close
+        </DialogPrimitive.Close>
+      )}
+    </div>
+  )
+}
+
+function DialogTitle({ className, ...props }: DialogPrimitive.Title.Props) {
+  return (
+    <DialogPrimitive.Title
+      data-slot="dialog-title"
+      className={cn(
+        "font-heading text-base leading-none font-medium",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function DialogDescription({
+  className,
+  ...props
+}: DialogPrimitive.Description.Props) {
+  return (
+    <DialogPrimitive.Description
+      data-slot="dialog-description"
+      className={cn(
+        "text-sm text-muted-foreground *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
+}
+</file>
+
+<file path="src/components/ui/dropdown-menu.tsx">
+"use client"
+
+import * as React from "react"
+import { Menu as MenuPrimitive } from "@base-ui/react/menu"
+
+import { cn } from "@/lib/utils"
+import { ChevronRightIcon, CheckIcon } from "lucide-react"
+
+function DropdownMenu({ ...props }: MenuPrimitive.Root.Props) {
+  return <MenuPrimitive.Root data-slot="dropdown-menu" {...props} />
+}
+
+function DropdownMenuPortal({ ...props }: MenuPrimitive.Portal.Props) {
+  return <MenuPrimitive.Portal data-slot="dropdown-menu-portal" {...props} />
+}
+
+function DropdownMenuTrigger({ ...props }: MenuPrimitive.Trigger.Props) {
+  return <MenuPrimitive.Trigger data-slot="dropdown-menu-trigger" {...props} />
+}
+
+function DropdownMenuContent({
+  align = "start",
+  alignOffset = 0,
+  side = "bottom",
+  sideOffset = 4,
+  className,
+  ...props
+}: MenuPrimitive.Popup.Props &
+  Pick<
+    MenuPrimitive.Positioner.Props,
+    "align" | "alignOffset" | "side" | "sideOffset"
+  >) {
+  return (
+    <MenuPrimitive.Portal>
+      <MenuPrimitive.Positioner
+        className="isolate z-50 outline-none"
+        align={align}
+        alignOffset={alignOffset}
+        side={side}
+        sideOffset={sideOffset}
+      >
+        <MenuPrimitive.Popup
+          data-slot="dropdown-menu-content"
+          className={cn("z-50 max-h-(--available-height) w-(--anchor-width) min-w-32 origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg bg-popover p-1 text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100 outline-none data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:overflow-hidden data-closed:fade-out-0 data-closed:zoom-out-95", className )}
+          {...props}
+        />
+      </MenuPrimitive.Positioner>
+    </MenuPrimitive.Portal>
+  )
+}
+
+function DropdownMenuGroup({ ...props }: MenuPrimitive.Group.Props) {
+  return <MenuPrimitive.Group data-slot="dropdown-menu-group" {...props} />
+}
+
+function DropdownMenuLabel({
+  className,
+  inset,
+  ...props
+}: MenuPrimitive.GroupLabel.Props & {
+  inset?: boolean
+}) {
+  return (
+    <MenuPrimitive.GroupLabel
+      data-slot="dropdown-menu-label"
+      data-inset={inset}
+      className={cn(
+        "px-1.5 py-1 text-xs font-medium text-muted-foreground data-inset:pl-7",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function DropdownMenuItem({
+  className,
+  inset,
+  variant = "default",
+  ...props
+}: MenuPrimitive.Item.Props & {
+  inset?: boolean
+  variant?: "default" | "destructive"
+}) {
+  return (
+    <MenuPrimitive.Item
+      data-slot="dropdown-menu-item"
+      data-inset={inset}
+      data-variant={variant}
+      className={cn(
+        "group/dropdown-menu-item relative flex cursor-default items-center gap-1.5 rounded-md px-1.5 py-1 text-sm outline-hidden select-none focus:bg-accent focus:text-accent-foreground not-data-[variant=destructive]:focus:**:text-accent-foreground data-inset:pl-7 data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 data-[variant=destructive]:focus:text-destructive dark:data-[variant=destructive]:focus:bg-destructive/20 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 data-[variant=destructive]:*:[svg]:text-destructive",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function DropdownMenuSub({ ...props }: MenuPrimitive.SubmenuRoot.Props) {
+  return <MenuPrimitive.SubmenuRoot data-slot="dropdown-menu-sub" {...props} />
+}
+
+function DropdownMenuSubTrigger({
+  className,
+  inset,
+  children,
+  ...props
+}: MenuPrimitive.SubmenuTrigger.Props & {
+  inset?: boolean
+}) {
+  return (
+    <MenuPrimitive.SubmenuTrigger
+      data-slot="dropdown-menu-sub-trigger"
+      data-inset={inset}
+      className={cn(
+        "flex cursor-default items-center gap-1.5 rounded-md px-1.5 py-1 text-sm outline-hidden select-none focus:bg-accent focus:text-accent-foreground not-data-[variant=destructive]:focus:**:text-accent-foreground data-inset:pl-7 data-popup-open:bg-accent data-popup-open:text-accent-foreground data-open:bg-accent data-open:text-accent-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      )}
+      {...props}
+    >
+      {children}
+      <ChevronRightIcon className="ml-auto" />
+    </MenuPrimitive.SubmenuTrigger>
+  )
+}
+
+function DropdownMenuSubContent({
+  align = "start",
+  alignOffset = -3,
+  side = "right",
+  sideOffset = 0,
+  className,
+  ...props
+}: React.ComponentProps<typeof DropdownMenuContent>) {
+  return (
+    <DropdownMenuContent
+      data-slot="dropdown-menu-sub-content"
+      className={cn("w-auto min-w-[96px] rounded-lg bg-popover p-1 text-popover-foreground shadow-lg ring-1 ring-foreground/10 duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95", className )}
+      align={align}
+      alignOffset={alignOffset}
+      side={side}
+      sideOffset={sideOffset}
+      {...props}
+    />
+  )
+}
+
+function DropdownMenuCheckboxItem({
+  className,
+  children,
+  checked,
+  inset,
+  ...props
+}: MenuPrimitive.CheckboxItem.Props & {
+  inset?: boolean
+}) {
+  return (
+    <MenuPrimitive.CheckboxItem
+      data-slot="dropdown-menu-checkbox-item"
+      data-inset={inset}
+      className={cn(
+        "relative flex cursor-default items-center gap-1.5 rounded-md py-1 pr-8 pl-1.5 text-sm outline-hidden select-none focus:bg-accent focus:text-accent-foreground focus:**:text-accent-foreground data-inset:pl-7 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      )}
+      checked={checked}
+      {...props}
+    >
+      <span
+        className="pointer-events-none absolute right-2 flex items-center justify-center"
+        data-slot="dropdown-menu-checkbox-item-indicator"
+      >
+        <MenuPrimitive.CheckboxItemIndicator>
+          <CheckIcon
+          />
+        </MenuPrimitive.CheckboxItemIndicator>
+      </span>
+      {children}
+    </MenuPrimitive.CheckboxItem>
+  )
+}
+
+function DropdownMenuRadioGroup({ ...props }: MenuPrimitive.RadioGroup.Props) {
+  return (
+    <MenuPrimitive.RadioGroup
+      data-slot="dropdown-menu-radio-group"
+      {...props}
+    />
+  )
+}
+
+function DropdownMenuRadioItem({
+  className,
+  children,
+  inset,
+  ...props
+}: MenuPrimitive.RadioItem.Props & {
+  inset?: boolean
+}) {
+  return (
+    <MenuPrimitive.RadioItem
+      data-slot="dropdown-menu-radio-item"
+      data-inset={inset}
+      className={cn(
+        "relative flex cursor-default items-center gap-1.5 rounded-md py-1 pr-8 pl-1.5 text-sm outline-hidden select-none focus:bg-accent focus:text-accent-foreground focus:**:text-accent-foreground data-inset:pl-7 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      )}
+      {...props}
+    >
+      <span
+        className="pointer-events-none absolute right-2 flex items-center justify-center"
+        data-slot="dropdown-menu-radio-item-indicator"
+      >
+        <MenuPrimitive.RadioItemIndicator>
+          <CheckIcon
+          />
+        </MenuPrimitive.RadioItemIndicator>
+      </span>
+      {children}
+    </MenuPrimitive.RadioItem>
+  )
+}
+
+function DropdownMenuSeparator({
+  className,
+  ...props
+}: MenuPrimitive.Separator.Props) {
+  return (
+    <MenuPrimitive.Separator
+      data-slot="dropdown-menu-separator"
+      className={cn("-mx-1 my-1 h-px bg-border", className)}
+      {...props}
+    />
+  )
+}
+
+function DropdownMenuShortcut({
+  className,
+  ...props
+}: React.ComponentProps<"span">) {
+  return (
+    <span
+      data-slot="dropdown-menu-shortcut"
+      className={cn(
+        "ml-auto text-xs tracking-widest text-muted-foreground group-focus/dropdown-menu-item:text-accent-foreground",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export {
+  DropdownMenu,
+  DropdownMenuPortal,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuLabel,
+  DropdownMenuItem,
+  DropdownMenuCheckboxItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
+}
+</file>
+
+<file path="src/components/ui/input.tsx">
+import * as React from "react"
+import { Input as InputPrimitive } from "@base-ui/react/input"
+
+import { cn } from "@/lib/utils"
+
+function Input({ className, type, ...props }: React.ComponentProps<"input">) {
+  return (
+    <InputPrimitive
+      type={type}
+      data-slot="input"
+      className={cn(
+        "h-8 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export { Input }
+</file>
+
+<file path="src/components/ui/label.tsx">
+"use client"
+
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+
+function Label({ className, ...props }: React.ComponentProps<"label">) {
+  return (
+    <label
+      data-slot="label"
+      className={cn(
+        "flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export { Label }
+</file>
+
+<file path="src/components/ui/progress.tsx">
+"use client"
+
+import { Progress as ProgressPrimitive } from "@base-ui/react/progress"
+
+import { cn } from "@/lib/utils"
+
+function Progress({
+  className,
+  children,
+  value,
+  ...props
+}: ProgressPrimitive.Root.Props) {
+  return (
+    <ProgressPrimitive.Root
+      value={value}
+      data-slot="progress"
+      className={cn("flex flex-wrap gap-3", className)}
+      {...props}
+    >
+      {children}
+      <ProgressTrack>
+        <ProgressIndicator />
+      </ProgressTrack>
+    </ProgressPrimitive.Root>
+  )
+}
+
+function ProgressTrack({ className, ...props }: ProgressPrimitive.Track.Props) {
+  return (
+    <ProgressPrimitive.Track
+      className={cn(
+        "relative flex h-1 w-full items-center overflow-x-hidden rounded-full bg-muted",
+        className
+      )}
+      data-slot="progress-track"
+      {...props}
+    />
+  )
+}
+
+function ProgressIndicator({
+  className,
+  ...props
+}: ProgressPrimitive.Indicator.Props) {
+  return (
+    <ProgressPrimitive.Indicator
+      data-slot="progress-indicator"
+      className={cn("h-full bg-primary transition-all", className)}
+      {...props}
+    />
+  )
+}
+
+function ProgressLabel({ className, ...props }: ProgressPrimitive.Label.Props) {
+  return (
+    <ProgressPrimitive.Label
+      className={cn("text-sm font-medium", className)}
+      data-slot="progress-label"
+      {...props}
+    />
+  )
+}
+
+function ProgressValue({ className, ...props }: ProgressPrimitive.Value.Props) {
+  return (
+    <ProgressPrimitive.Value
+      className={cn(
+        "ml-auto text-sm text-muted-foreground tabular-nums",
+        className
+      )}
+      data-slot="progress-value"
+      {...props}
+    />
+  )
+}
+
+export {
+  Progress,
+  ProgressTrack,
+  ProgressIndicator,
+  ProgressLabel,
+  ProgressValue,
+}
+</file>
+
+<file path="src/components/ui/radio-group.tsx">
+"use client"
+
+import { Radio as RadioPrimitive } from "@base-ui/react/radio"
+import { RadioGroup as RadioGroupPrimitive } from "@base-ui/react/radio-group"
+
+import { cn } from "@/lib/utils"
+
+function RadioGroup({ className, ...props }: RadioGroupPrimitive.Props) {
+  return (
+    <RadioGroupPrimitive
+      data-slot="radio-group"
+      className={cn("grid w-full gap-2", className)}
+      {...props}
+    />
+  )
+}
+
+function RadioGroupItem({ className, ...props }: RadioPrimitive.Root.Props) {
+  return (
+    <RadioPrimitive.Root
+      data-slot="radio-group-item"
+      className={cn(
+        "group/radio-group-item peer relative flex aspect-square size-4 shrink-0 rounded-full border border-input outline-none after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 aria-invalid:aria-checked:border-primary dark:bg-input/30 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground dark:data-checked:bg-primary",
+        className
+      )}
+      {...props}
+    >
+      <RadioPrimitive.Indicator
+        data-slot="radio-group-indicator"
+        className="flex size-4 items-center justify-center"
+      >
+        <span className="absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary-foreground" />
+      </RadioPrimitive.Indicator>
+    </RadioPrimitive.Root>
+  )
+}
+
+export { RadioGroup, RadioGroupItem }
+</file>
+
+<file path="src/components/ui/select.tsx">
+"use client"
+
+import * as React from "react"
+import { Select as SelectPrimitive } from "@base-ui/react/select"
+
+import { cn } from "@/lib/utils"
+import { ChevronDownIcon, CheckIcon, ChevronUpIcon } from "lucide-react"
+
+const Select = SelectPrimitive.Root
+
+function SelectGroup({ className, ...props }: SelectPrimitive.Group.Props) {
+  return (
+    <SelectPrimitive.Group
+      data-slot="select-group"
+      className={cn("scroll-my-1 p-1", className)}
+      {...props}
+    />
+  )
+}
+
+function SelectValue({ className, ...props }: SelectPrimitive.Value.Props) {
+  return (
+    <SelectPrimitive.Value
+      data-slot="select-value"
+      className={cn("flex flex-1 text-left", className)}
+      {...props}
+    />
+  )
+}
+
+function SelectTrigger({
+  className,
+  size = "default",
+  children,
+  ...props
+}: SelectPrimitive.Trigger.Props & {
+  size?: "sm" | "default"
+}) {
+  return (
+    <SelectPrimitive.Trigger
+      data-slot="select-trigger"
+      data-size={size}
+      className={cn(
+        "flex w-fit items-center justify-between gap-1.5 rounded-lg border border-input bg-transparent py-2 pr-2 pl-2.5 text-sm whitespace-nowrap transition-colors outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 data-placeholder:text-muted-foreground data-[size=default]:h-8 data-[size=sm]:h-7 data-[size=sm]:rounded-[min(var(--radius-md),10px)] *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 dark:bg-input/30 dark:hover:bg-input/50 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      )}
+      {...props}
+    >
+      {children}
+      <SelectPrimitive.Icon
+        render={
+          <ChevronDownIcon className="pointer-events-none size-4 text-muted-foreground" />
+        }
+      />
+    </SelectPrimitive.Trigger>
+  )
+}
+
+function SelectContent({
+  className,
+  children,
+  side = "bottom",
+  sideOffset = 4,
+  align = "center",
+  alignOffset = 0,
+  alignItemWithTrigger = true,
+  ...props
+}: SelectPrimitive.Popup.Props &
+  Pick<
+    SelectPrimitive.Positioner.Props,
+    "align" | "alignOffset" | "side" | "sideOffset" | "alignItemWithTrigger"
+  >) {
+  return (
+    <SelectPrimitive.Portal>
+      <SelectPrimitive.Positioner
+        side={side}
+        sideOffset={sideOffset}
+        align={align}
+        alignOffset={alignOffset}
+        alignItemWithTrigger={alignItemWithTrigger}
+        className="isolate z-50"
+      >
+        <SelectPrimitive.Popup
+          data-slot="select-content"
+          data-align-trigger={alignItemWithTrigger}
+          className={cn("relative isolate z-50 max-h-(--available-height) w-(--anchor-width) min-w-36 origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg bg-popover text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100 data-[align-trigger=true]:animate-none data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95", className )}
+          {...props}
+        >
+          <SelectScrollUpButton />
+          <SelectPrimitive.List>{children}</SelectPrimitive.List>
+          <SelectScrollDownButton />
+        </SelectPrimitive.Popup>
+      </SelectPrimitive.Positioner>
+    </SelectPrimitive.Portal>
+  )
+}
+
+function SelectLabel({
+  className,
+  ...props
+}: SelectPrimitive.GroupLabel.Props) {
+  return (
+    <SelectPrimitive.GroupLabel
+      data-slot="select-label"
+      className={cn("px-1.5 py-1 text-xs text-muted-foreground", className)}
+      {...props}
+    />
+  )
+}
+
+function SelectItem({
+  className,
+  children,
+  ...props
+}: SelectPrimitive.Item.Props) {
+  return (
+    <SelectPrimitive.Item
+      data-slot="select-item"
+      className={cn(
+        "relative flex w-full cursor-default items-center gap-1.5 rounded-md py-1 pr-8 pl-1.5 text-sm outline-hidden select-none focus:bg-accent focus:text-accent-foreground not-data-[variant=destructive]:focus:**:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
+        className
+      )}
+      {...props}
+    >
+      <SelectPrimitive.ItemText className="flex flex-1 shrink-0 gap-2 whitespace-nowrap">
+        {children}
+      </SelectPrimitive.ItemText>
+      <SelectPrimitive.ItemIndicator
+        render={
+          <span className="pointer-events-none absolute right-2 flex size-4 items-center justify-center" />
+        }
+      >
+        <CheckIcon className="pointer-events-none" />
+      </SelectPrimitive.ItemIndicator>
+    </SelectPrimitive.Item>
+  )
+}
+
+function SelectSeparator({
+  className,
+  ...props
+}: SelectPrimitive.Separator.Props) {
+  return (
+    <SelectPrimitive.Separator
+      data-slot="select-separator"
+      className={cn("pointer-events-none -mx-1 my-1 h-px bg-border", className)}
+      {...props}
+    />
+  )
+}
+
+function SelectScrollUpButton({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.ScrollUpArrow>) {
+  return (
+    <SelectPrimitive.ScrollUpArrow
+      data-slot="select-scroll-up-button"
+      className={cn(
+        "top-0 z-10 flex w-full cursor-default items-center justify-center bg-popover py-1 [&_svg:not([class*='size-'])]:size-4",
+        className
+      )}
+      {...props}
+    >
+      <ChevronUpIcon
+      />
+    </SelectPrimitive.ScrollUpArrow>
+  )
+}
+
+function SelectScrollDownButton({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.ScrollDownArrow>) {
+  return (
+    <SelectPrimitive.ScrollDownArrow
+      data-slot="select-scroll-down-button"
+      className={cn(
+        "bottom-0 z-10 flex w-full cursor-default items-center justify-center bg-popover py-1 [&_svg:not([class*='size-'])]:size-4",
+        className
+      )}
+      {...props}
+    >
+      <ChevronDownIcon
+      />
+    </SelectPrimitive.ScrollDownArrow>
+  )
+}
+
+export {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+}
+</file>
+
+<file path="src/components/ui/sonner.tsx">
+"use client"
+
+import { useTheme } from "next-themes"
+import { Toaster as Sonner, type ToasterProps } from "sonner"
+import { CircleCheckIcon, InfoIcon, TriangleAlertIcon, OctagonXIcon, Loader2Icon } from "lucide-react"
+
+const Toaster = ({ ...props }: ToasterProps) => {
+  const { theme = "system" } = useTheme()
+
+  return (
+    <Sonner
+      theme={theme as ToasterProps["theme"]}
+      className="toaster group"
+      icons={{
+        success: (
+          <CircleCheckIcon className="size-4" />
+        ),
+        info: (
+          <InfoIcon className="size-4" />
+        ),
+        warning: (
+          <TriangleAlertIcon className="size-4" />
+        ),
+        error: (
+          <OctagonXIcon className="size-4" />
+        ),
+        loading: (
+          <Loader2Icon className="size-4 animate-spin" />
+        ),
+      }}
+      style={
+        {
+          "--normal-bg": "var(--popover)",
+          "--normal-text": "var(--popover-foreground)",
+          "--normal-border": "var(--border)",
+          "--border-radius": "var(--radius)",
+        } as React.CSSProperties
+      }
+      toastOptions={{
+        classNames: {
+          toast: "cn-toast",
+        },
+      }}
+      {...props}
+    />
+  )
+}
+
+export { Toaster }
+</file>
+
+<file path="src/components/ui/tabs.tsx">
+"use client"
+
+import { Tabs as TabsPrimitive } from "@base-ui/react/tabs"
+import { cva, type VariantProps } from "class-variance-authority"
+
+import { cn } from "@/lib/utils"
+
+function Tabs({
+  className,
+  orientation = "horizontal",
+  ...props
+}: TabsPrimitive.Root.Props) {
+  return (
+    <TabsPrimitive.Root
+      data-slot="tabs"
+      data-orientation={orientation}
+      className={cn(
+        "group/tabs flex gap-2 data-horizontal:flex-col",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+const tabsListVariants = cva(
+  "group/tabs-list inline-flex w-fit items-center justify-center rounded-lg p-[3px] text-muted-foreground group-data-horizontal/tabs:h-8 group-data-vertical/tabs:h-fit group-data-vertical/tabs:flex-col data-[variant=line]:rounded-none",
+  {
+    variants: {
+      variant: {
+        default: "bg-muted",
+        line: "gap-1 bg-transparent",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+)
+
+function TabsList({
+  className,
+  variant = "default",
+  ...props
+}: TabsPrimitive.List.Props & VariantProps<typeof tabsListVariants>) {
+  return (
+    <TabsPrimitive.List
+      data-slot="tabs-list"
+      data-variant={variant}
+      className={cn(tabsListVariants({ variant }), className)}
+      {...props}
+    />
+  )
+}
+
+function TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {
+  return (
+    <TabsPrimitive.Tab
+      data-slot="tabs-trigger"
+      className={cn(
+        "relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 py-0.5 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50 has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1 aria-disabled:pointer-events-none aria-disabled:opacity-50 dark:text-muted-foreground dark:hover:text-foreground group-data-[variant=default]/tabs-list:data-active:shadow-sm group-data-[variant=line]/tabs-list:data-active:shadow-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent dark:group-data-[variant=line]/tabs-list:data-active:border-transparent dark:group-data-[variant=line]/tabs-list:data-active:bg-transparent",
+        "data-active:bg-background data-active:text-foreground dark:data-active:border-input dark:data-active:bg-input/30 dark:data-active:text-foreground",
+        "after:absolute after:bg-foreground after:opacity-0 after:transition-opacity group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:bottom-[-5px] group-data-horizontal/tabs:after:h-0.5 group-data-vertical/tabs:after:inset-y-0 group-data-vertical/tabs:after:-right-1 group-data-vertical/tabs:after:w-0.5 group-data-[variant=line]/tabs-list:data-active:after:opacity-100",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function TabsContent({ className, ...props }: TabsPrimitive.Panel.Props) {
+  return (
+    <TabsPrimitive.Panel
+      data-slot="tabs-content"
+      className={cn("flex-1 text-sm outline-none", className)}
+      {...props}
+    />
+  )
+}
+
+export { Tabs, TabsList, TabsTrigger, TabsContent, tabsListVariants }
+</file>
+
+<file path="src/components/ui/textarea.tsx">
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+
+function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
+  return (
+    <textarea
+      data-slot="textarea"
+      className={cn(
+        "flex field-sizing-content min-h-16 w-full rounded-lg border border-input bg-transparent px-2.5 py-2 text-base transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export { Textarea }
+</file>
+
+<file path="src/lib/bot-types.ts">
+export type UserIdentity = "student" | "teacher" | "business" | "content_creator" | "other";
+
+export type BotCategory =
+  | "emotional_companion"
+  | "study_assistant"
+  | "tutor"
+  | "customer_service"
+  | "custom";
+
+export type SpeakingStyle = "formal" | "casual" | "funny" | "strict";
+
+export type Visibility = "private" | "specific_users" | "public";
+
+export interface BotFormData {
+  // Step 1
+  identity: UserIdentity | null;
+  // Step 2
+  category: BotCategory | null;
+  // Step 3 - 基础设定（必填）
+  name: string;
+  avatar_url: string;
+  gender: string;
+  age: string;
+  relationship: string;
+  personality: string;
+  speakingStyle: SpeakingStyle;
+  forbiddenBehaviors: string;
+  // Step 4 - 高级定制（选填）
+  hobbies: string;
+  interests: string;
+  sharedActivities: string;
+  dietPreferences: string;
+  sleepSchedule: string;
+  memorableMoments: string;
+  weaknesses: string;
+  anniversaries: string;
+  customFaqs: string;
+  // Step 5 - 发布
+  visibility: Visibility;
+  allowedEmails: string[];
+}
+
+export const DEFAULT_BOT_FORM: BotFormData = {
+  identity: null,
+  category: null,
+  name: "",
+  avatar_url: "",
+  gender: "",
+  age: "",
+  relationship: "",
+  personality: "",
+  speakingStyle: "casual",
+  forbiddenBehaviors: "",
+  hobbies: "",
+  interests: "",
+  sharedActivities: "",
+  dietPreferences: "",
+  sleepSchedule: "",
+  memorableMoments: "",
+  weaknesses: "",
+  anniversaries: "",
+  customFaqs: "",
+  visibility: "private",
+  allowedEmails: [],
+};
+
+export const IDENTITY_OPTIONS = [
+  { value: "student" as const, label: "学生", emoji: "📚" },
+  { value: "teacher" as const, label: "教师", emoji: "🏫" },
+  { value: "business" as const, label: "商务", emoji: "💼" },
+  { value: "content_creator" as const, label: "内容创作者", emoji: "🎬" },
+  { value: "other" as const, label: "其他", emoji: "✨" },
+];
+
+export const CATEGORY_OPTIONS = [
+  { value: "emotional_companion" as const, label: "情感陪伴", emoji: "💝", desc: "像朋友一样聊天、倾诉" },
+  { value: "study_assistant" as const, label: "学习助手", emoji: "📖", desc: "帮助学习、答疑解惑" },
+  { value: "tutor" as const, label: "辅导老师", emoji: "👩‍🏫", desc: "系统性教学、指导" },
+  { value: "customer_service" as const, label: "客服助手", emoji: "🎧", desc: "回答客户问题" },
+  { value: "custom" as const, label: "自定义角色", emoji: "🎭", desc: "自由定义 Bot 人格" },
+];
+
+export const SPEAKING_STYLE_OPTIONS = [
+  { value: "formal" as const, label: "正式", desc: "用词规范、礼貌得体" },
+  { value: "casual" as const, label: "随性", desc: "像朋友一样自然聊天" },
+  { value: "funny" as const, label: "幽默", desc: "风趣搞笑、轻松愉快" },
+  { value: "strict" as const, label: "严肃", desc: "严谨认真、不苟言笑" },
+];
+</file>
+
+<file path="src/lib/hooks/use-auth.tsx">
+"use client";
+
+import { createContext, useContext, useEffect, useState } from "react";
+import { type User, type Session } from "@supabase/supabase-js";
+import { createClient } from "@/lib/supabase/client";
+
+type AuthContextType = {
+  user: User | null;
+  session: Session | null;
+  loading: boolean;
+  signOut: () => Promise<void>;
+};
+
+const AuthContext = createContext<AuthContextType>({
+  user: null,
+  session: null,
+  loading: true,
+  signOut: async () => {},
+});
+
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [loading, setLoading] = useState(true);
+  const supabase = createClient();
+
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const signOut = async () => {
+    await supabase.auth.signOut();
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, session, loading, signOut }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export const useAuth = () => useContext(AuthContext);
+</file>
+
+<file path="src/lib/prompt-generator.ts">
+import type { BotFormData } from "./bot-types";
+
+const SPEAKING_STYLE_GUIDE: Record<string, string> = {
+  formal: "用词规范、礼貌得体，回复完整但不过于冗长",
+  casual: "说话都是短句，用词亲切幽默，像朋友一样自然聊天，经常用语气词",
+  funny: "风趣幽默，喜欢开玩笑，用夸张的方式表达，偶尔用梗和段子活跃气氛",
+  strict: "严谨认真，直奔主题，不闲聊，只给准确和专业的信息",
+};
+
+function nonEmpty(lines: string[], s: string | undefined | null) {
+  if (s && s.trim()) lines.push(s.trim());
+}
+
+export function generateSystemPrompt(data: BotFormData): string {
+  const lines: string[] = [];
+
+  // === 身份 ===
+  lines.push(`你是 ${data.name || "AI助手"}${data.gender ? `，${data.gender}` : ""}${data.age ? `，${data.age}岁` : ""}。`);
+  if (data.relationship) lines.push(`你与用户的关系是：${data.relationship}。`);
+
+  // === 性格 ===
+  const traits: string[] = [];
+  if (data.personality) {
+    data.personality.split(/[,，;；\n]/).forEach((t) => {
+      const trimmed = t.trim();
+      if (trimmed) traits.push(`- ${trimmed}`);
+    });
+  }
+  if (traits.length > 0) {
+    lines.push("");
+    lines.push("你的性格");
+    lines.push(...traits);
+  }
+
+  // === 说话习惯 ===
+  const style = SPEAKING_STYLE_GUIDE[data.speakingStyle] || SPEAKING_STYLE_GUIDE.casual;
+  lines.push("");
+  lines.push("说话习惯（必须严格遵守）");
+  lines.push(`1. ${style}`);
+  lines.push("2. 回复都很短，以对方为中心，会顺着话题聊");
+  lines.push("3. 如果对方吐露心声或遇到难题，变得严肃认真，多倾听少说话");
+  lines.push("4. 如果对方求助，先安抚再专注帮对方解决问题，不开玩笑");
+  lines.push("5. 会毫不掩饰地表达关心，很懂对方的情绪");
+  if (data.forbiddenBehaviors) {
+    lines.push(`6. 以下行为绝对禁止：${data.forbiddenBehaviors}`);
+  }
+
+  // === 话题规则 ===
+  lines.push("");
+  lines.push("话题规则");
+  lines.push(`1. 你擅长聊${data.category === "emotional_companion" ? "日常、情感和共同回忆" : data.category === "study_assistant" ? "学习方法、知识答疑" : "各种轻松话题"}的最新动向`);
+  lines.push("2. 如果遇到不懂的话题，诚实地说还不了解，但表示愿意学习");
+  lines.push("3. 如果被问隐私或敏感问题，礼貌地转移话题");
+  lines.push("4. 绝对不能说不耐烦或讨厌对方的话");
+
+  // === 个人资料（选填） ===
+  const hasProfile = data.hobbies || data.interests || data.sharedActivities ||
+    data.dietPreferences || data.sleepSchedule || data.memorableMoments || data.weaknesses;
+
+  if (hasProfile) {
+    lines.push("");
+    lines.push("个人资料");
+    nonEmpty(lines, data.hobbies && `- 喜欢玩：${data.hobbies}`);
+    nonEmpty(lines, data.interests && `- 喜欢看：${data.interests}`);
+    nonEmpty(lines, data.sharedActivities && `- 和对方一起做过：${data.sharedActivities}`);
+    nonEmpty(lines, data.dietPreferences && `- 饮食偏好：${data.dietPreferences}`);
+    nonEmpty(lines, data.sleepSchedule && `- 作息：${data.sleepSchedule}`);
+    nonEmpty(lines, data.memorableMoments && `- 最难忘的事：${data.memorableMoments}`);
+    nonEmpty(lines, data.weaknesses && `- 缺点：${data.weaknesses}`);
+  }
+
+  // === 纪念日（选填） ===
+  if (data.anniversaries && data.anniversaries.trim()) {
+    lines.push("");
+    lines.push("纪念日");
+    lines.push(data.anniversaries.trim());
+  }
+
+  // === 常见问答（选填） ===
+  if (data.customFaqs && data.customFaqs.trim()) {
+    lines.push("");
+    lines.push("扩展知识 — 对话应对指南");
+    lines.push(data.customFaqs.trim());
+  }
+
+  // === 通用准则 ===
+  lines.push("");
+  lines.push("行为准则");
+  lines.push("1. 始终以友好、有帮助的态度回应用户");
+  lines.push("2. 不编造不确定的信息，遇到不懂的直接承认");
+  lines.push("3. 以用户为中心，倾听并理解需求");
+  lines.push("4. 回复简洁有力，避免冗长");
+
+  return lines.join("\n");
+}
+</file>
+
+<file path="src/lib/supabase/client.ts">
+import { createBrowserClient } from "@supabase/ssr";
+
+export function createClient() {
+  return createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+}
+</file>
+
+<file path="src/lib/supabase/route-client.ts">
+import { createServerClient } from "@supabase/ssr";
+import { type NextRequest } from "next/server";
+
+export function createRouteClient(req: NextRequest) {
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return req.cookies.getAll();
+        },
+        setAll() {
+          // Route Handlers 不需要写 cookie，session 已在浏览器侧管理
+        },
+      },
+    }
+  );
+}
+</file>
+
+<file path="src/lib/supabase/server.ts">
+import { createServerClient } from "@supabase/ssr";
+import { cookies } from "next/headers";
+
+export async function createClient() {
+  const cookieStore = await cookies();
+
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return cookieStore.getAll();
+        },
+        setAll(cookiesToSet) {
+          try {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options)
+            );
+          } catch {
+            // Can be ignored in Server Components
+          }
+        },
+      },
+    }
+  );
+}
+</file>
+
+<file path="src/lib/supabase/service.ts">
+import { createClient } from "@supabase/supabase-js";
+
+// Service role client — 仅用于 API Routes 的可信后端操作
+export function createServiceClient() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_KEY!
+  );
+}
+</file>
+
+<file path="src/lib/utils.ts">
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+</file>
+
+<file path="src/proxy.ts">
+import { createServerClient } from "@supabase/ssr";
+import { NextResponse, type NextRequest } from "next/server";
+
+export async function proxy(request: NextRequest) {
+  let supabaseResponse = NextResponse.next({ request });
+
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) =>
+            supabaseResponse.cookies.set(name, value, options)
+          );
+        },
+      },
+    }
+  );
+
+  const protectedPaths = ["/builder", "/dashboard", "/market", "/chat"];
+  const isProtected = protectedPaths.some((p) =>
+    request.nextUrl.pathname.startsWith(p)
+  );
+
+  if (isProtected) {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      const redirectUrl = new URL("/auth/login", request.url);
+      redirectUrl.searchParams.set("redirect", request.nextUrl.pathname);
+      return NextResponse.redirect(redirectUrl);
+    }
+  }
+
+  return supabaseResponse;
+}
+
+export const config = {
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
+};
+</file>
+
+<file path="supabase-schema.sql">
+-- =============================================
+-- 许小熊 Bot V2 — 数据库 Schema
+-- 直接在 Supabase SQL Editor 执行此文件
+-- =============================================
+
+-- 1. 用户 Profile 表（扩展 auth.users）
+CREATE TABLE IF NOT EXISTS public.profiles (
+  id uuid PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+  email text,
+  display_name text,
+  identity text, -- student, teacher, business, content_creator, other
+  created_at timestamptz DEFAULT now(),
+  updated_at timestamptz DEFAULT now()
+);
+
+-- 先启用 pgcrypto 扩展（uuid 需要）
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA extensions;
+
+-- 自动为新注册用户创建 profile
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS trigger
+SECURITY DEFINER SET search_path = ''
+AS $$
+BEGIN
+  INSERT INTO public.profiles (id, email, display_name)
+  VALUES (
+    NEW.id,
+    NEW.email,
+    COALESCE(NEW.raw_user_meta_data->>'display_name', split_part(NEW.email, '@', 1))
+  );
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- 创建触发器（如果已存在则跳过，不执行 DROP）
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_trigger
+    WHERE tgname = 'on_auth_user_created'
+    AND tgrelid = 'auth.users'::regclass
+  ) THEN
+    CREATE TRIGGER on_auth_user_created
+      AFTER INSERT ON auth.users
+      FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
+  END IF;
+END;
+$$;
+
+-- =============================================
+-- 2. Bots 表
+-- =============================================
+CREATE TABLE IF NOT EXISTS public.bots (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  creator_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  name text NOT NULL,
+  avatar_url text,
+  gender text,
+  age int,
+  relationship text,
+  personality text,
+  speaking_style text,
+  forbidden_behaviors text,
+  system_prompt text NOT NULL,
+  category text DEFAULT 'custom', -- emotional_companion, study_assistant, tutor, customer_service, custom
+  visibility text DEFAULT 'private' CHECK (visibility IN ('private', 'specific_users', 'public')),
+  slug text UNIQUE,
+  published boolean DEFAULT false,
+  created_at timestamptz DEFAULT now(),
+  updated_at timestamptz DEFAULT now()
+);
+
+-- =============================================
+-- 3. 聊天会话表
+-- =============================================
+CREATE TABLE IF NOT EXISTS public.chat_sessions (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  bot_id uuid NOT NULL REFERENCES public.bots(id) ON DELETE CASCADE,
+  user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  created_at timestamptz DEFAULT now()
+);
+
+-- =============================================
+-- 4. 消息表
+-- =============================================
+CREATE TABLE IF NOT EXISTS public.messages (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  session_id uuid NOT NULL REFERENCES public.chat_sessions(id) ON DELETE CASCADE,
+  role text NOT NULL CHECK (role IN ('user', 'assistant')),
+  content text NOT NULL,
+  created_at timestamptz DEFAULT now()
+);
+
+-- =============================================
+-- 5. Bot 权限表（白名单）
+-- =============================================
+CREATE TABLE IF NOT EXISTS public.bot_permissions (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  bot_id uuid NOT NULL REFERENCES public.bots(id) ON DELETE CASCADE,
+  allowed_email text NOT NULL,
+  created_at timestamptz DEFAULT now()
+);
+
+-- =============================================
+-- 5.5 用户-Bot 关联表（公开 bot 对话即关联）
+-- =============================================
+CREATE TABLE IF NOT EXISTS public.user_bot_relations (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  bot_id uuid NOT NULL REFERENCES public.bots(id) ON DELETE CASCADE,
+  memory_notes text DEFAULT '',
+  created_at timestamptz DEFAULT now(),
+  UNIQUE(user_id, bot_id)
+);
+
+-- =============================================
+-- 索引
+-- =============================================
+CREATE INDEX IF NOT EXISTS idx_bots_creator ON public.bots(creator_id);
+CREATE INDEX IF NOT EXISTS idx_bots_slug ON public.bots(slug);
+CREATE INDEX IF NOT EXISTS idx_bots_visibility ON public.bots(visibility);
+CREATE INDEX IF NOT EXISTS idx_chat_sessions_bot ON public.chat_sessions(bot_id);
+CREATE INDEX IF NOT EXISTS idx_chat_sessions_user ON public.chat_sessions(user_id);
+CREATE INDEX IF NOT EXISTS idx_messages_session ON public.messages(session_id);
+CREATE INDEX IF NOT EXISTS idx_user_bot_relations_user ON public.user_bot_relations(user_id);
+CREATE INDEX IF NOT EXISTS idx_user_bot_relations_bot ON public.user_bot_relations(bot_id);
+
+-- =============================================
+-- Slug 生成函数
+-- =============================================
+CREATE OR REPLACE FUNCTION public.generate_bot_slug()
+RETURNS trigger AS $$
+DECLARE
+  base_slug text;
+  new_slug text;
+  counter int := 0;
+BEGIN
+  -- 从名字生成 base slug（转拼音/英文，或直接用随机）
+  base_slug := lower(regexp_replace(NEW.name, '[^a-zA-Z0-9一-鿿]', '-', 'g'));
+  -- 截断到合理长度
+  base_slug := substring(base_slug from 1 for 40);
+
+  -- 如果名字不含英文/数字，用随机字符串
+  IF base_slug = '' OR base_slug = '-' THEN
+    base_slug := substring(replace(NEW.id::text, '-', ''), 1, 8);
+  END IF;
+
+  new_slug := base_slug;
+  LOOP
+    -- 显式检查 slug 是否已存在（EXCEPTION 在 BEFORE INSERT 中无效）
+    IF NOT EXISTS (SELECT 1 FROM public.bots WHERE slug = new_slug) THEN
+      NEW.slug := new_slug;
+      RETURN NEW;
+    END IF;
+    counter := counter + 1;
+    new_slug := base_slug || '-' || counter;
+  END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+
+-- 创建 Bot 时自动生成 slug
+DROP TRIGGER IF EXISTS trigger_generate_bot_slug ON public.bots;
+CREATE TRIGGER trigger_generate_bot_slug
+  BEFORE INSERT ON public.bots
+  FOR EACH ROW
+  WHEN (NEW.slug IS NULL)
+  EXECUTE FUNCTION public.generate_bot_slug();
+
+-- =============================================
+-- Row Level Security (RLS)
+-- =============================================
+
+-- Profiles
+ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Users can read own profile" ON public.profiles;
+CREATE POLICY "Users can read own profile"
+  ON public.profiles FOR SELECT
+  USING (auth.uid() = id);
+DROP POLICY IF EXISTS "Users can update own profile" ON public.profiles;
+CREATE POLICY "Users can update own profile"
+  ON public.profiles FOR UPDATE
+  USING (auth.uid() = id);
+
+-- Bots
+ALTER TABLE public.bots ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Creator can do anything" ON public.bots;
+CREATE POLICY "Creator can do anything"
+  ON public.bots FOR ALL
+  USING (auth.uid() = creator_id);
+DROP POLICY IF EXISTS "Anyone can read public bots" ON public.bots;
+CREATE POLICY "Anyone can read public bots"
+  ON public.bots FOR SELECT
+  USING (visibility = 'public' AND published = true);
+-- link_only 已移除，不再需要对应策略
+DROP POLICY IF EXISTS "Specified users can read bot" ON public.bots;
+CREATE POLICY "Specified users can read bot"
+  ON public.bots FOR SELECT
+  USING (
+    visibility = 'specific_users'
+    AND published = true
+    AND (
+      auth.uid() = creator_id
+      OR EXISTS (
+        SELECT 1 FROM public.bot_permissions
+        WHERE bot_permissions.bot_id = bots.id
+        AND bot_permissions.allowed_email = auth.jwt()->>'email'
+      )
+    )
+  );
+
+-- Chat Sessions
+ALTER TABLE public.chat_sessions ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Participants can read sessions" ON public.chat_sessions;
+CREATE POLICY "Participants can read sessions"
+  ON public.chat_sessions FOR SELECT
+  USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can create sessions" ON public.chat_sessions;
+CREATE POLICY "Users can create sessions"
+  ON public.chat_sessions FOR INSERT
+  WITH CHECK (auth.uid() = user_id);
+
+-- Messages
+ALTER TABLE public.messages ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Session participants can read messages" ON public.messages;
+CREATE POLICY "Session participants can read messages"
+  ON public.messages FOR SELECT
+  USING (
+    EXISTS (
+      SELECT 1 FROM public.chat_sessions
+      WHERE chat_sessions.id = messages.session_id
+      AND chat_sessions.user_id = auth.uid()
+    )
+  );
+DROP POLICY IF EXISTS "Users can insert messages in their sessions" ON public.messages;
+CREATE POLICY "Users can insert messages in their sessions"
+  ON public.messages FOR INSERT
+  WITH CHECK (
+    EXISTS (
+      SELECT 1 FROM public.chat_sessions
+      WHERE chat_sessions.id = messages.session_id
+      AND chat_sessions.user_id = auth.uid()
+    )
+  );
+
+-- Bot Permissions
+ALTER TABLE public.bot_permissions ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Creator manages permissions" ON public.bot_permissions;
+CREATE POLICY "Creator manages permissions"
+  ON public.bot_permissions FOR ALL
+  USING (
+    EXISTS (
+      SELECT 1 FROM public.bots
+      WHERE bots.id = bot_permissions.bot_id
+      AND bots.creator_id = auth.uid()
+    )
+  );
+
+-- User-Bot Relations
+ALTER TABLE public.user_bot_relations ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Users can read own relations" ON public.user_bot_relations;
+CREATE POLICY "Users can read own relations"
+  ON public.user_bot_relations FOR SELECT
+  USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can insert own relations" ON public.user_bot_relations;
+CREATE POLICY "Users can insert own relations"
+  ON public.user_bot_relations FOR INSERT
+  WITH CHECK (auth.uid() = user_id);
+</file>
+
+<file path="tsconfig.json">
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.mts"
+  ],
+  "exclude": ["node_modules"]
+}
+</file>
+
+</files>
