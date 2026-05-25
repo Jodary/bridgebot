@@ -88,6 +88,13 @@ export function AuthForm({ mode }: AuthFormProps) {
               required
               minLength={6}
             />
+            {isLogin && (
+              <div className="text-right">
+                <a href="/auth/forgot-password" className="text-sm text-muted-foreground hover:text-primary hover:underline">
+                  忘记密码？
+                </a>
+              </div>
+            )}
           </div>
         </CardContent>
         <CardFooter className="flex flex-col gap-3">

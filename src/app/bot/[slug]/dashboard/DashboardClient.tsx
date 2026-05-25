@@ -77,10 +77,9 @@ import {
               </div>
               <div className="flex gap-2">
                 <Button
-                  variant="outline"
+                  variant="default"
                   size="sm"
                   onClick={() => setShowDeleteDialog(true)}
-                  className="text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200"
                 >
                   <Trash2 className="w-4 h-4 mr-1" />
                   删除 Bot
@@ -145,13 +144,14 @@ import {
               >
                 取消
               </button>
-              <button
-                className="px-3 py-1.5 text-sm rounded-md bg-red-600 text-white hover:bg-red-700 disabled:opacity-50"
+              <Button
+                variant="default"
+                size="sm"
                 onClick={handleDelete}
                 disabled={deleting}
               >
                 {deleting ? "删除中..." : "确认删除"}
-              </button>
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>

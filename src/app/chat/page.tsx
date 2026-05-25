@@ -215,7 +215,7 @@ export default function ChatPage() {
                       📊 仪表盘
                     </span>
                     <button
-                      className="text-xs text-red-500 hover:text-red-700 flex items-center gap-0.5"
+                      className="text-xs font-medium text-foreground/50 hover:text-foreground flex items-center gap-0.5"
                       onClick={(e) => {
                         e.stopPropagation();
                         setDeleteTarget(bot);
@@ -249,13 +249,14 @@ export default function ChatPage() {
             >
               取消
             </button>
-            <button
-              className="px-3 py-1.5 text-sm rounded-md bg-red-600 text-white hover:bg-red-700 disabled:opacity-50"
+            <Button
+              variant="default"
+              size="sm"
               onClick={handleDelete}
               disabled={deleting}
             >
               {deleting ? "删除中..." : "确认删除"}
-            </button>
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
